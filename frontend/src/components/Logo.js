@@ -3,7 +3,16 @@ import logo from '../assets/layout_set_logo 1.png'; // Adjust the path if necess
 
 const Logo = () => {
   return (
-    <img src={logo} alt="Logo" style={{ height: '50px' }} />
+    <img 
+    src={logo} 
+    alt="Logo" 
+    style={{ 
+      height: '50px',  
+      position: 'absolute', 
+      right: '1490px' 
+    }} 
+  />
+  
   );
 };
 

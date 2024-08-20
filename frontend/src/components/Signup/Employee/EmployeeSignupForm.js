@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import CreatableSelect from 'react-select/creatable';
 import { InputGroup, Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 import './EmployeeSignupForm.css';
+import Logo from '../../Logo';
 
 const skillsOptions = [
   { value: 'JavaScript', label: 'JavaScript' },
@@ -39,6 +40,7 @@ const EmployeeSignupForm = () => {
 
   return (
     <div className="gradient-background">
+          <Logo/>
       <div className="form-container">
         <h2 className="fw-bold text-uppercase mb-4 text-center">Employee Registration</h2>
         <Form onSubmit={handleSubmit}>

@@ -1,16 +1,11 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Signup from '../src/views/Signup';
+import React from "react";
+import AppRoutes from "../src/routes/routes";
+// import { AuthProvider } from "./context/AuthContext";
 
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/signup-employee" element={<Signup />} />
-        <Route path="/signup-employer" element={<Signup />} />
-      </Routes>
-    </Router>
-  );
-}
+const App = () => (
+  // <AuthProvider>
+    <AppRoutes />
+  // </AuthProvider>
+);
 
 export default App;
