@@ -1,0 +1,31 @@
+/* EmployeeSignupForm.css */
+.gradient-background {
+    background: linear-gradient(to bottom, #212A31, #2E3944, #124E66, #748D92, #D3D9D4);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .form-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  h5 {
+    margin-top: 20px;
+  }
+  
+  button {
+    margin-top: 10px;
+  }
+  
+  .d-grid {
+    margin-top: 20px;
+  }
+  

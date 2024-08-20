@@ -1,0 +1,7 @@
+/* Add this CSS to your styles file or within a <style> block */
+.gradient-background {
+    background: linear-gradient(to bottom, #212A31, #2E3944, #124E66, #748D92, #D3D9D4);
+    min-height: 100vh; /* Ensures the background covers the full viewport height */
+    padding: 20px; /* Adds some padding for content inside */
+  }
+  
