@@ -14,9 +14,10 @@ import {
   Button,
 } from "reactstrap";
 import Logo from "./Logo";
+import NavigationBar from '../components/nav/nav';
 import { ReactComponent as LogoWhite } from "../assets/images/logos/adminprowhite.svg";
 import user1 from "../assets/images/users/user4.jpg";
-import { useAuth } from "../context/AuthContext";
+// import { useAuth } from "../context/AuthContext";
 import { useNavigate } from 'react-router-dom';
 
 
@@ -25,7 +26,7 @@ const Header = () => {
 
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
 
-  const { logout } = useAuth();
+  // const { logout } = useAuth();
   const navigate = useNavigate();
 
 
@@ -38,7 +39,7 @@ const Header = () => {
     document.getElementById("sidebarArea").classList.toggle("showSidebar");
   };
   const handleLogout = () => {
-    logout();
+    // logout();
     navigate("/signin"); // Redirect to the sign-in page after logging out
   };
 
@@ -49,7 +50,7 @@ const Header = () => {
     <Navbar color="white" light expand="md" className="fix-header">
       <div className="d-flex align-items-center">
         <div className="d-lg-block d-none me-5 pe-3">
-          <Logo />
+        <NavigationBar/>
         </div>
         <NavbarBrand href="/dashboard">
           <LogoWhite className="d-lg-none" />
