@@ -2,9 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import session from 'express-session';
 import connectDB from './config/db.js'; 
-// import signup_router from "./routes/authRoutes.js";
-// import ticketRoutes from "./routes/ticketRoutes.js";
 import cors from 'cors';
+import employerRoutes from './routes/employerRoutes.js';
 
 dotenv.config(); // Load environment variables
 
@@ -22,7 +21,7 @@ app.use(cors({
 
 // Connect to the database
 connectDB();
-console.log("jsut test");
+
 
 // Middleware setup
 app.use(express.json());
@@ -34,8 +33,7 @@ app.use(session({
 app.use(express.urlencoded({ extended: true }));
 
 
-// app.use('/', signup_router);
-// app.use('/api', ticketRoutes); 
+app.use('/api/employers', employerRoutes);
 
 
 // Start the server

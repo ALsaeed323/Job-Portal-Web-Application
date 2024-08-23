@@ -4,6 +4,7 @@ import FullLayout from '../layouts/FullLayout';
 
 const Home = lazy(() => import('../pages/Home'));
 const Signup = lazy(() => import('../pages/Signup'));
+const Signin = lazy(() => import('../pages/Signin'));
 const About = lazy(() => import('../pages/about'));
 const JobList = lazy(() => import('../pages/jobslist'));
 
@@ -17,11 +18,10 @@ const AppRoutes = () => {
           <Route path="/" element={<Home />} />
           <Route path="/signup-employee" element={<Signup />} />
           <Route path="/signup-employer" element={<Signup />} />
+          <Route path="/signin-employee" element={<Signin />} />  {/* Employee Signin */}
+          <Route path="/signin-employer" element={<Signin />} />  {/* Employer Signin */}
           <Route path="/about" element={<About />} />
-          
-          {/* Define the layout as a parent route */}
           <Route path="/dashboard" element={<FullLayout />}>
-            {/* Nested route should have a relative path */}
             <Route path="jobslist" element={<JobList />} />
           </Route>
         </Routes>
