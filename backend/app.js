@@ -4,6 +4,7 @@ import session from 'express-session';
 import connectDB from './config/db.js'; 
 import cors from 'cors';
 import employerRoutes from './routes/employerRoutes.js';
+import employeeRoutes from './routes/employeeRoutes.js';
 
 dotenv.config(); // Load environment variables
 
@@ -34,6 +35,8 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use('/api/employers', employerRoutes);
+app.use('/api/employees', employeeRoutes);
+
 
 
 // Start the server
