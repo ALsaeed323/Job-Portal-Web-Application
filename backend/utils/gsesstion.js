@@ -1,12 +1,14 @@
-import crypto from 'crypto';
+import jwt from 'jsonwebtoken';
 
 /**
- * Generate a secure random session ID.
- * @param {number} length - The length of the session ID.
- * @returns {string} - The generated session ID.
+ * Generate a secure JWT session token.
+ * @param {Object} payload - The data to include in the JWT payload.
+ * @param {string} secret - The secret key to sign the JWT.
+ * @param {Object} options - Additional options like token expiry.
+ * @returns {string} - The generated JWT token.
  */
-function generateSessionId(length = 32) {
-  return crypto.randomBytes(length).toString('hex');
+function generateSessionToken(payload, secret, options = {}) {
+  return jwt.sign(payload, secret, options);
 }
 
-export default generateSessionId;
+export default generateSessionToken;

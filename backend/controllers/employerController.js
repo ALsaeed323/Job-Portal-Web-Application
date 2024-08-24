@@ -1,7 +1,13 @@
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import Employer from '../models/employerModel.js';
 import Session from '../models/employerSesstionModel.js'; 
-import generateSessionId from '../utils/gsesstion.js'; 
+import generateSessionToken from '../utils/gsesstion.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const JWT_SECRET = process.env.JWT_SECRET 
 
 export const signupEmployer = async (req, res) => {
   try {
@@ -70,8 +76,11 @@ export const signinEmployer = async (req, res) => {
       session.lastAccess = new Date();
       await session.save();
     } else {
-      // Generate a session ID
-      const sessionId = generateSessionId();
+      // Generate a JWT session token instead of a random session ID
+      const sessionId = generateSessionToken({ 
+        userId: employer._id, 
+        role: 'employer' 
+      }, JWT_SECRET, { expiresIn: '1h' });  // Adjust expiration as needed
 
       // Create a new session in the database
       session = new Session({
@@ -84,11 +93,11 @@ export const signinEmployer = async (req, res) => {
       await session.save();
     }
 
-    // Respond with success and session information
+    // Respond with success and the JWT token
     res.status(200).json({ 
       message: 'Sign in successful', 
       employer, 
-      sessionId: session.sessionId 
+      sessionToken: session.sessionId  // JWT token is returned as sessionToken
     });
   } catch (error) {
     console.error('Error signing in employer:', error);
