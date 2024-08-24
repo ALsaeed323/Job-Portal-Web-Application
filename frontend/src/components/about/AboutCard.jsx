@@ -1,8 +1,8 @@
-import React from "react"
-import Heading from "../common/heading/Heading"
-import "./about.css"
-import { homeAbout } from "../../dummydata"
-import Awrapper from "./Awrapper"
+import React from "react";
+import Heading from "../common/heading/Heading";
+import "./about.css";
+import { homeAbout } from "../../dummydata";
+import Awrapper from "./Awrapper";
 
 const AboutCard = () => {
   return (
@@ -10,23 +10,23 @@ const AboutCard = () => {
       <section className='aboutHome'>
         <div className='container flexSB'>
           <div className='left row'>
-            <img src='./images/about.webp' alt='' />
+            <img src='./images/about.webp' alt='About Job Portal' />
           </div>
           <div className='right row'>
-            <Heading subtitle='LEARN ANYTHING' title='Benefits About Online Learning Expertise' />
+            <Heading subtitle='FIND YOUR DREAM JOB' title='Benefits of Using Our Job Portal' />
             <div className='items'>
               {homeAbout.map((val) => {
                 return (
-                  <div className='item flexSB'>
+                  <div className='item flexSB' key={val.id}>
                     <div className='img'>
-                      <img src={val.cover} alt='' />
+                      <img src={val.cover} alt={val.title} />
                     </div>
                     <div className='text'>
                       <h2>{val.title}</h2>
                       <p>{val.desc}</p>
                     </div>
                   </div>
-                )
+                );
               })}
             </div>
           </div>
@@ -34,7 +34,7 @@ const AboutCard = () => {
       </section>
       <Awrapper />
     </>
-  )
-}
+  );
+};
 
-export default AboutCard
+export default AboutCard;

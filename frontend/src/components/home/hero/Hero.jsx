@@ -8,14 +8,17 @@ const Hero = () => {
       <section className='hero'>
         <div className='container'>
           <div className='row'>
-            <Heading subtitle='WELCOME TO ACADEMIA' title='Best Online Education Expertise' />
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+            <Heading subtitle='WELCOME TO JOB PORTAL' title='Connecting Employers with Top Talent' />
+            <p>
+              Discover a platform where employers can easily register their companies, post job openings, and manage applications. 
+              Job seekers can create dynamic CVs, explore job opportunities, and receive personalized job recommendations.
+            </p>
             <div className='button'>
               <button className='primary-btn'>
                 GET STARTED NOW <i className='fa fa-long-arrow-alt-right'></i>
               </button>
               <button>
-                VIEW COURSE <i className='fa fa-long-arrow-alt-right'></i>
+                BROWSE JOBS <i className='fa fa-long-arrow-alt-right'></i>
               </button>
             </div>
           </div>
@@ -25,5 +28,5 @@ const Hero = () => {
     </>
   )
 }
-
+  
 export default Hero

@@ -2,173 +2,193 @@ export const homeAbout = [
   {
     id: 1,
     cover: "https://img.icons8.com/dotty/80/000000/storytelling.png",
-    title: "Online Courses",
-    desc: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
-  },
-  {
-    id: 1,
-    cover: "https://img.icons8.com/ios/80/000000/diploma.png",
-    title: "Earn A Certificates",
-    desc: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
-  },
-  {
-    id: 1,
-    cover: "https://img.icons8.com/ios/80/000000/athlete.png",
-    title: "Learn with Expert",
-    desc: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
-  },
-]
-export const awrapper = [
-  {
-    cover: "https://img.icons8.com/external-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto/80/ffffff/external-graduation-education-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto.png",
-    data: "3,000",
-    title: "SUCCESS STORIES",
-  },
-
-  {
-    cover: "https://img.icons8.com/ios/80/ffffff/athlete.png",
-    data: "320",
-    title: "TRUSTED TUTORS",
-  },
-  {
-    cover: "https://img.icons8.com/external-outline-icons-maxicons/80/ffffff/external-calender-insurance-outline-outline-icons-maxicons.png",
-    data: "1,000",
-    title: "SCHEDULES",
-  },
-  {
-    cover: "https://img.icons8.com/ios/80/ffffff/macbook-idea--v3.png",
-    data: "587",
-    title: "COURSES",
-  },
-]
-export const coursesCard = [
-  {
-    id: 1,
-    cover: "../images/courses/c1.png",
-    coursesName: "Introducing to Software Engineering",
-    courTeacher: [
-      {
-        dcover: "./images/back.webp",
-        name: "by John Smith",
-        totalTime: "50 lectures (190 hrs)",
-      },
-    ],
-    priceAll: "$100 All Course",
-    pricePer: "$15 per month",
+    title: "Post Job Openings",
+    desc: "Easily post job openings and reach a large pool of qualified candidates. Our platform ensures your job listings are seen by the right people.",
   },
   {
     id: 2,
-    cover: "../images/courses/c2.png",
-    coursesName: "Enhancing Adobe Photoshop CC 2020 Skills",
-    courTeacher: [
-      {
-        dcover: "./images/back.webp",
-        name: "by Ram Gurung",
-        totalTime: "30 lectures (125 hrs)",
-      },
-    ],
-    priceAll: "$200 All Course",
-    pricePer: "$25 per month",
+    cover: "https://img.icons8.com/ios/80/000000/diploma.png",
+    title: "Build Your Profile",
+    desc: "Create a comprehensive profile that highlights your skills, experience, and education. Our tools help job seekers stand out to potential employers.",
   },
   {
     id: 3,
-    cover: "../images/courses/c3.png",
-    coursesName: "HTML, CSS, and Javascript for Web Developers",
+    cover: "https://img.icons8.com/ios/80/000000/athlete.png",
+    title: "Connect with Top Talent",
+    desc: "Employers can connect with top talent across various industries. Our platform makes it easy to manage applications and find the perfect fit for your team.",
+  },
+];
+
+export const awrapper = [
+  {
+    cover: "https://img.icons8.com/external-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto/80/ffffff/external-graduation-education-yogi-aprelliyanto-basic-outline-yogi-aprelliyanto.png",
+    data: "5,000+",
+    title: "SUCCESSFUL HIRES",
+  },
+  {
+    cover: "https://img.icons8.com/ios/80/ffffff/athlete.png",
+    data: "1,200",
+    title: "ACTIVE EMPLOYERS",
+  },
+  {
+    cover: "https://img.icons8.com/external-outline-icons-maxicons/80/ffffff/external-calender-insurance-outline-outline-icons-maxicons.png",
+    data: "10,000+",
+    title: "JOB POSTINGS",
+  },
+  {
+    cover: "https://img.icons8.com/ios/80/ffffff/macbook-idea--v3.png",
+    data: "15,000+",
+    title: "REGISTERED JOB SEEKERS",
+  },
+];
+
+export const jobCard = [
+  {
+    id: 1,
+    cover: "../images/jobs/j1.png",
+    jobTitle: "Software Engineer",
+    companyName: "Tech Corp",
+    location: "New York, NY",
     courTeacher: [
       {
         dcover: "./images/back.webp",
-        name: "by Saroj Nepal",
-        totalTime: "50 lectures (50 hrs)",
+        name: "Tech Corp",
+        totalTime: "Full-time, 2-5 years experience",
       },
     ],
-    priceAll: "$50 All Course",
-    pricePer: "$5 per month",
+    salary: "$80,000 - $100,000",
+    postedDate: "Posted 2 days ago",
+  },
+  {
+    id: 2,
+    cover: "../images/jobs/j2.png",
+    jobTitle: "Project Manager",
+    companyName: "Business Solutions Inc.",
+    location: "San Francisco, CA",
+    courTeacher: [
+      {
+        dcover: "./images/back.webp",
+        name: "Business Solutions Inc.",
+        totalTime: "Full-time, 3-7 years experience",
+      },
+    ],
+    salary: "$90,000 - $120,000",
+    postedDate: "Posted 1 week ago",
+  },
+  {
+    id: 3,
+    cover: "../images/jobs/j3.png",
+    jobTitle: "Data Analyst",
+    companyName: "Data Insights",
+    location: "Austin, TX",
+    courTeacher: [
+      {
+        dcover: "./images/back.webp",
+        name: "Data Insights",
+        totalTime: "Full-time, 1-3 years experience",
+      },
+    ],
+    salary: "$70,000 - $90,000",
+    postedDate: "Posted 5 days ago",
   },
   {
     id: 4,
-    cover: "../images/courses/c4.png",
-    coursesName: "Introducing to Programming with WordPress",
+    cover: "../images/jobs/j4.png",
+    jobTitle: "UX/UI Designer",
+    companyName: "Creative Agency",
+    location: "Los Angeles, CA",
     courTeacher: [
       {
         dcover: "./images/back.webp",
-        name: "by Prabin Thapa Mager",
-        totalTime: "20 lectures (20 hrs)",
+        name: "Creative Agency",
+        totalTime: "Full-time, 2-4 years experience",
       },
     ],
-    priceAll: "$30 All Course",
-    pricePer: "$3 per month",
+    salary: "$75,000 - $95,000",
+    postedDate: "Posted 3 days ago",
   },
   {
     id: 5,
-    cover: "../images/courses/c5.png",
-    coursesName: "Introducing to Programming with ReactJS",
+    cover: "../images/jobs/j5.png",
+    jobTitle: "Backend Developer",
+    companyName: "Web Solutions Ltd.",
+    location: "Remote",
     courTeacher: [
       {
         dcover: "./images/back.webp",
-        name: "by Sunil Bishowkaram",
-        totalTime: "100 lectures (150 hrs)",
+        name: "Web Solutions Ltd.",
+        totalTime: "Full-time, 3-5 years experience",
       },
     ],
-    priceAll: "$300 All Course",
-    pricePer: "$30 per month",
+    salary: "$85,000 - $110,000",
+    postedDate: "Posted 2 weeks ago",
   },
   {
     id: 6,
-    cover: "../images/courses/c6.png",
-    coursesName: "Learn Frontend Programming Language",
+    cover: "../images/jobs/j6.png",
+    jobTitle: "Marketing Specialist",
+    companyName: "Market Leaders",
+    location: "Chicago, IL",
     courTeacher: [
       {
         dcover: "./images/back.webp",
-        name: "by Sunil Bishowkaram",
-        totalTime: "200 lectures (300 hrs)",
+        name: "Market Leaders",
+        totalTime: "Full-time, 1-3 years experience",
       },
     ],
-    priceAll: "$500 All Course",
-    pricePer: "$80 per month",
+    salary: "$60,000 - $80,000",
+    postedDate: "Posted 1 month ago",
   },
   {
     id: 7,
-    cover: "../images/courses/c7.png",
-    coursesName: "Introducing to with HTML / CSS",
+    cover: "../images/jobs/j7.png",
+    jobTitle: "Sales Manager",
+    companyName: "Sales Solutions",
+    location: "Dallas, TX",
     courTeacher: [
       {
         dcover: "./images/back.webp",
-        name: "by Price",
-        totalTime: "20 lectures (50 hrs)",
+        name: "Sales Solutions",
+        totalTime: "Full-time, 4-6 years experience",
       },
     ],
-    priceAll: "$20 All Course",
-    pricePer: "$2 per month",
+    salary: "$70,000 - $90,000",
+    postedDate: "Posted 3 weeks ago",
   },
   {
     id: 8,
-    cover: "../images/courses/c8.png",
-    coursesName: "Introducing to with JAVA",
+    cover: "../images/jobs/j8.png",
+    jobTitle: "Full Stack Developer",
+    companyName: "Innovative Tech",
+    location: "Seattle, WA",
     courTeacher: [
       {
         dcover: "./images/back.webp",
-        name: "by Petter",
-        totalTime: "80 lectures (200 hrs)",
+        name: "Innovative Tech",
+        totalTime: "Full-time, 2-4 years experience",
       },
     ],
-    priceAll: "$200 All Course",
-    pricePer: "$40 per month",
+    salary: "$90,000 - $120,000",
+    postedDate: "Posted 1 week ago",
   },
   {
     id: 9,
-    cover: "../images/courses/c9.png",
-    coursesName: "Introducing to with HTML / CSS / JAVASCRIPT",
+    cover: "../images/jobs/j9.png",
+    jobTitle: "HR Coordinator",
+    companyName: "People First",
+    location: "Boston, MA",
     courTeacher: [
       {
         dcover: "./images/back.webp",
-        name: "by Petter",
-        totalTime: "50 lectures (50 hrs)",
+        name: "People First",
+        totalTime: "Full-time, 1-3 years experience",
       },
     ],
-    priceAll: "$20 All Course",
-    pricePer: "$3 per month",
+    salary: "$50,000 - $65,000",
+    postedDate: "Posted 2 weeks ago",
   },
-]
+];
+
 export const online = [
   {
     cover: "./images/courses/online/o1.png",
@@ -287,52 +307,54 @@ export const team = [
 ]
 export const price = [
   {
-    name: "BASIC PLAN",
-    price: "49K",
-    desc: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
+    name: "STARTER PLAN",
+    price: "49",
+    desc: "Ideal for small businesses or startups. Post up to 5 job listings and get access to basic applicant tracking tools.",
   },
   {
-    name: "BEGINNER PLAN",
-    price: "79K",
-    desc: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
+    name: "GROWTH PLAN",
+    price: "79",
+    desc: "Designed for growing companies. Post up to 20 job listings, access advanced applicant tracking, and get priority support.",
   },
   {
-    name: "PREMIUM PLAN",
-    price: "109k",
-    desc: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
+    name: "PROFESSIONAL PLAN",
+    price: "109",
+    desc: "Perfect for larger companies. Post unlimited job listings, use premium applicant tracking tools, and receive dedicated account management.",
   },
   {
-    name: "ULTIMATE PLAN",
-    price: "149K",
-    desc: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
+    name: "ENTERPRISE PLAN",
+    price: "149",
+    desc: "Best for enterprises with complex needs. Enjoy all features of the Professional Plan plus custom branding and API access.",
   },
-]
+];
+
 export const faq = [
   {
-    title: "How to Enroll This Online Courses?",
-    desc: "This is the first item's accordion body. It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. It's also worth noting that just about any HTML can go within the .accordion-body, though the transition does limit overflow.",
+    title: "How do I create an account as an employer?",
+    desc: "To create an account as an employer, click on the 'Sign Up' button on the homepage, select 'Employer', and fill in your company details. Once your account is created, you can start posting job openings and managing applications.",
   },
   {
-    title: "Where It is hidden by default, until the collapse?",
-    desc: "It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. It's also worth noting that just about any HTML can go within the .accordion-body, though the transition does limit overflow.",
+    title: "How do I register as a job seeker?",
+    desc: "To register as a job seeker, click on the 'Sign Up' button, select 'Job Seeker', and complete the registration form with your personal and professional details. After registering, you can build your CV, apply for jobs, and receive job recommendations.",
   },
   {
-    title: "How It is hidden by default, until the collapse?",
-    desc: "It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. It's also worth noting that just about any HTML can go within the .accordion-body, though the transition does limit overflow.",
+    title: "How do I post a job as an employer?",
+    desc: "Once you have created an employer account, log in and navigate to the 'Post a Job' section. Fill in the job details, including the title, description, requirements, and salary. Your job posting will then be visible to all job seekers.",
   },
   {
-    title: "How to Enroll This Online Courses?",
-    desc: "This is the first item's accordion body. It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. It's also worth noting that just about any HTML can go within the .accordion-body, though the transition does limit overflow.",
+    title: "How can I search for jobs?",
+    desc: "Job seekers can search for jobs by using the search bar on the homepage. You can filter jobs by location, industry, and job type to find the most suitable positions. You can also receive personalized job recommendations based on your profile.",
   },
   {
-    title: "Where It is hidden by default, until the collapse?",
-    desc: "It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. It's also worth noting that just about any HTML can go within the .accordion-body, though the transition does limit overflow.",
+    title: "How do I manage job applications?",
+    desc: "Employers can manage job applications from the 'Applications' section in their dashboard. You can view applicant details, track application statuses, and communicate with potential candidates directly through the platform.",
   },
   {
-    title: "How It is hidden by default, until the collapse?",
-    desc: "It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. It's also worth noting that just about any HTML can go within the .accordion-body, though the transition does limit overflow.",
+    title: "How do I update my profile or CV?",
+    desc: "As a job seeker, you can update your profile or CV by logging into your account and navigating to the 'Profile' section. Here, you can edit your personal details, work experience, education, and skills to ensure your CV is always up to date.",
   },
-]
+];
+
 export const blog = [
   {
     id: 1,
@@ -392,23 +414,24 @@ export const blog = [
 export const testimonal = [
   {
     id: 1,
-    name: "ROGER SCOTT",
-    post: "MARKETING MANAGER",
-    desc: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
+    name: "Emily Johnson",
+    post: "HR Director at TechCorp",
+    desc: "Thanks to the job portal, we found highly qualified candidates quickly and efficiently. The platform's user-friendly interface made posting jobs and managing applications a breeze.",
     cover: "./images/testo/t1.webp",
   },
   {
     id: 2,
-    name: "ROGER SCOTT",
-    post: "MARKETING MANAGER",
-    desc: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
+    name: "Michael Brown",
+    post: "Software Engineer",
+    desc: "I was able to find my dream job through this job portal! The CV builder and job recommendations were incredibly helpful in making my profile stand out to potential employers.",
     cover: "./images/testo/t2.webp",
   },
   {
     id: 3,
-    name: "ROGER SCOTT",
-    post: "MARKETING MANAGER",
-    desc: "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
+    name: "Sarah Wilson",
+    post: "Marketing Manager at Creative Agency",
+    desc: "This platform made it easy for us to attract top talent. The ability to filter applications and communicate directly with candidates saved us so much time and effort.",
     cover: "./images/testo/t3.webp",
   },
-]
+];
+

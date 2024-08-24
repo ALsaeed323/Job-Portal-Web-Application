@@ -4,7 +4,6 @@ import { validateSignup, validateSignin } from '../middleware/employerValidator.
 
 const router = express.Router();
 
-// Apply validation middleware before the controller function
 router.post('/signup', validateSignup, signupEmployer);
 router.post('/signin', validateSignin, signinEmployer);
 
