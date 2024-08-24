@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import Employer from '../models/employerModel.js';
 import Session from '../models/employerSesstionModel.js'; 
 import generateSessionToken from '../utils/gsesstion.js';
