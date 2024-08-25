@@ -1,11 +1,10 @@
-import JobListingsPage from '../components/JobListings/JobListings'
-import NavigationBar from '../components/nav/nav'
+import JobListingsPage from '../components/Job/JobListings'
+
 
 
 const JobList = () => {
   return (
     <>
-    <NavigationBar/>
       <JobListingsPage/>
     </>
   )

@@ -1,6 +1,6 @@
 import React from 'react';
 import './404.css';
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/EmployerContext";
 import { useNavigate } from "react-router-dom";
 
 const NotFound = () => {

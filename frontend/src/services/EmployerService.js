@@ -20,8 +20,19 @@ const signupEmployer = async (employerData) => {
       throw error.response.data;
     }
   };
-  
+  const logoutEmployer = async (sessionToken) => {
+    try {
+    
+      console.log("heloooooooooooooooo"+sessionToken)
+      const response = await axios.post(`${API_URL}/logout`, { sessionToken });
+      return response.data;
+    } catch (error) {
+      console.error('Logout request failed:', error.response?.data || error.message);
+      throw error;
+    }
+  };
   export default {
     signupEmployer,
     signinEmployer,
+    logoutEmployer,
   };

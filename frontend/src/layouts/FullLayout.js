@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
-import Header from "./Header";
+import Header from '../components/nav/dashboardnav'
 import { Container } from "reactstrap";
 
 const FullLayout = () => {

@@ -1,0 +1,30 @@
+.gradient-background {
+    background: linear-gradient(to bottom, #212A31, #2E3944, #124E66, #748D92, #D3D9D4);
+    min-height: 100vh;
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    padding: 20px;
+    margin-left: 300px ;
+}
+
+.form-container {
+    background-color: white;
+    padding: 40px; /* Increased padding for better form layout */
+    border-radius: 10px; /* Slightly increased border-radius for smoother edges */
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow for depth */
+    max-width: 500px; /* Set a max-width to make the form more compact */
+    width: 100%;
+}
+
+h5 {
+    margin-top: 20px;
+}
+
+button {
+    margin-top: 10px;
+}
+
+.d-grid {
+    margin-top: 20px;
+}

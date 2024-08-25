@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import employeeService from '../services/EmployeeService';
 import employerService from '../services/EmployerService'; 
 
 const AuthContext = createContext();
@@ -35,7 +34,7 @@ export const AuthProvider = ({ children }) => {
   
 
       setUser(response.employer);
-      localStorage.setItem("sessionToken", response.employer.sessionToken);
+      localStorage.setItem("sessionToken", response.sessionToken);
       localStorage.setItem("user", JSON.stringify(response.employer));
 
       // Role-based navigation logic
@@ -54,25 +53,25 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       const sessionToken = localStorage.getItem("sessionToken");
-      console.log(sessionToken+"kkkkkkkkkkkkkkkkkkkkkk");
-
+  
       if (!sessionToken) {
-        console.error('No session ID found');
+        console.error('No session token found');
         return;
       }
-
-      await employeeService.logout(sessionToken); // Assuming logout is handled via employeeService or similar for employer
-
+  
+      await employerService.logoutEmployer(sessionToken);
+  
       setUser(null);
       localStorage.removeItem("user");
       localStorage.removeItem('sessionToken');
-
-      navigate("/signin");
+  
+      navigate("/signin-employer");
     } catch (error) {
       console.error("Logout failed:", error);
       throw error;
     }
   };
+  
 
   const value = {
     user,

@@ -20,6 +20,7 @@ const signinEmployee = async (employeeData) => {
   }
 };
 
+
 export default {
   signupEmployee,
   signinEmployee,
