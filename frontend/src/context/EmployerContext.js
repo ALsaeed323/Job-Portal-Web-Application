@@ -35,7 +35,6 @@ export const AuthProvider = ({ children }) => {
   
 
       setUser(response.employer);
-      console.log("llllllllllllllllllllllllllll"+response);
       localStorage.setItem("sessionToken", response.employer.sessionToken);
       localStorage.setItem("user", JSON.stringify(response.employer));
 
@@ -55,6 +54,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       const sessionToken = localStorage.getItem("sessionToken");
+      console.log(sessionToken+"kkkkkkkkkkkkkkkkkkkkkk");
 
       if (!sessionToken) {
         console.error('No session ID found');

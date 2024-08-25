@@ -24,7 +24,7 @@ const NavigationBar = () => {
           <Nav className="ms-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/about">About</Nav.Link>
-            <Button as={Link} to="/get-started" variant="outline-primary"  onClick={handleLogout}>
+            <Button as={Link}  variant="outline-primary"  onClick={handleLogout}>
               Logout 
             </Button>
           </Nav>
