@@ -13,8 +13,7 @@ import {
   Dropdown,
   Button,
 } from "reactstrap";
-import Logo from "./Logo";
-import NavigationBar from '../components/nav/nav';
+import NavigationBar from '../components/nav/dashboardnav';
 import { ReactComponent as LogoWhite } from "../assets/images/logos/adminprowhite.svg";
 import user1 from "../assets/images/users/user4.jpg";
 // import { useAuth } from "../context/AuthContext";

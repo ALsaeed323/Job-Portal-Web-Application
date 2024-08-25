@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 import Logo from '../../Logo';
-import { useAuth } from '../../../context/AuthContext'; // Import the Auth context
+import { useAuth } from '../../../context/EmployerContext'; // Import the Auth context
 import { useNavigate } from 'react-router-dom';
 
 export default function EmployerSigninForm() {

@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import FullLayout from '../layouts/FullLayout';
-import { useAuth } from '../context/AuthContext'; // Assuming you have an AuthContext
+import { useAuth } from '../context/EmployerContext'; // Assuming you have an AuthContext
 
 const Home = lazy(() => import('../pages/Home'));
 const Signup = lazy(() => import('../pages/Signup'));

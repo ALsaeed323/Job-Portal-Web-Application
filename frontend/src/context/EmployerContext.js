@@ -36,13 +36,11 @@ export const AuthProvider = ({ children }) => {
 
       setUser(response.employer);
       console.log("llllllllllllllllllllllllllll"+response);
-      localStorage.setItem("sessionId", response.employer.sessionId);
+      localStorage.setItem("sessionToken", response.employer.sessionToken);
       localStorage.setItem("user", JSON.stringify(response.employer));
 
       // Role-based navigation logic
       if (response.employer.userType === "employer") {
-        navigate("/");
-      } else if (response.employer.userType === "employee") {
         navigate("/");
       } else {
         navigate("/"); // Default fallback
@@ -56,18 +54,18 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      const sessionId = localStorage.getItem("sessionId");
+      const sessionToken = localStorage.getItem("sessionToken");
 
-      if (!sessionId) {
+      if (!sessionToken) {
         console.error('No session ID found');
         return;
       }
 
-      await employeeService.logout(sessionId); // Assuming logout is handled via employeeService or similar for employer
+      await employeeService.logout(sessionToken); // Assuming logout is handled via employeeService or similar for employer
 
       setUser(null);
       localStorage.removeItem("user");
-      localStorage.removeItem('sessionId');
+      localStorage.removeItem('sessionToken');
 
       navigate("/signin");
     } catch (error) {
