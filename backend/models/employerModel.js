@@ -8,6 +8,7 @@ const EmployerSchema = new mongoose.Schema({
   email: { type: String, unique: true, required: true },
   address: { type: String },
   password: { type: String, required: true }, // Add the password field
+  userType: { type: String, default: 'employer' }, // Add userType with default value
   createdAt: { type: Date, default: Date.now },
 });
 

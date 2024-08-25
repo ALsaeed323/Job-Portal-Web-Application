@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 import Logo from '../../Logo';
-import EmployerService from '../../../services/EmployerService'; // Import the service
+import { useAuth } from '../../../context/AuthContext'; // Import the Auth context
+import { useNavigate } from 'react-router-dom';
 
 export default function EmployerSigninForm() {
   const [formData, setFormData] = useState({
@@ -11,6 +12,9 @@ export default function EmployerSigninForm() {
 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const { login } = useAuth(); // Use the login function from the Auth context
+  const navigate = useNavigate(); // To navigate after successful login
 
   const handleChange = (e) => {
     setFormData({
@@ -25,19 +29,19 @@ export default function EmployerSigninForm() {
     setError(null);
     
     try {
-      const response = await EmployerService.signinEmployer(formData);
-      alert('Sign in successful!');
-      setLoading(false);
-      // Redirect or handle the successful login as needed
+      const response = await login(formData);
     } catch (err) {
-      setError(err.message || 'Something went wrong!');
+      setError(err.response?.data?.message || 'Something went wrong!');
+    } finally {
       setLoading(false);
     }
   };
 
   return (
+    <>
+     <Logo />
     <div className="gradient-background">
-      <Logo />
+     
       <Container>
         <Row className="vh-100 d-flex justify-content-center align-items-center">
           <Col md={10} lg={8} xs={12}>
@@ -96,5 +100,6 @@ export default function EmployerSigninForm() {
         </Row>
       </Container>
     </div>
+    </>
   );
 }

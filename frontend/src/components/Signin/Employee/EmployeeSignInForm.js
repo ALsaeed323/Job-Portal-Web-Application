@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Col, Button, Container, Form } from 'react-bootstrap';
+import { Col, Button, Form } from 'react-bootstrap';
 import './EmployeeSignInForm.css';
 import Logo from '../../Logo';
-import employeeService from '../../../services/EmployeeService'; // Import the service
+import { useAuth } from '../../../context/AuthContext'; // Import the Auth context
+
 
 const EmployeeSignInForm = () => {
   const [formData, setFormData] = useState({
@@ -10,8 +11,10 @@ const EmployeeSignInForm = () => {
     password: '',
   });
 
-  const [message, setMessage] = useState(null);
-  const [messageType, setMessageType] = useState(''); // 'success' or 'error'
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const { login } = useAuth();
+
 
   const handleChange = (e) => {
     setFormData({
@@ -23,13 +26,12 @@ const EmployeeSignInForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await employeeService.signinEmployee(formData);
-      setMessage(response.message); // Assuming the backend sends a success message
-      setMessageType('success');
+      const response = await login(formData);
+      setSuccessMessage('Login successful');
+      setErrorMessage('');
     } catch (error) {
-      console.error('Error signing in employee:', error);
-      setMessage(error.response?.message || 'An error occurred. Please try again.');
-      setMessageType('error');
+      setSuccessMessage('');
+      setErrorMessage(error.response?.data?.message || 'An error occurred. Please try again.');
     }
   };
 
@@ -66,9 +68,14 @@ const EmployeeSignInForm = () => {
               />
             </Form.Group>
 
-            {message && (
-              <div className={`mb-3 text-${messageType === 'success' ? 'success' : 'danger'}`}>
-                {message}
+            {successMessage && (
+              <div className="mb-3 text-success">
+                {successMessage}
+              </div>
+            )}
+            {errorMessage && (
+              <div className="mb-3 text-danger">
+                {errorMessage}
               </div>
             )}
 
