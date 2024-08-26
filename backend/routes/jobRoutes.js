@@ -1,6 +1,6 @@
 // routes/jobRoutes.js
 import express from 'express';
-import { createJob, getAllJobs,matchJobs,applyForJob } from '../controllers/JobController.js';
+import { createJob, getAllJobs,matchJobs,applyForJob,getEmployeeApplications } from '../controllers/JobController.js';
 
 const router = express.Router();
 
@@ -11,6 +11,7 @@ router.post('/createjobs', createJob);
 router.get('/getjobs', getAllJobs);
 router.get('/match/:employeeId', matchJobs);
 router.post('/apply', applyForJob);
+router.get('/:employeeId', getEmployeeApplications);
 
 
 export default router;

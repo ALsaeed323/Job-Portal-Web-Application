@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, useLocation, useNavigate } from
 import FullLayout from '../layouts/FullLayout';
 import { useAuth as useEmployerAuth } from '../context/EmployerContext';
 import { useAuth as useEmployeeAuth } from '../context/EmployeeContext';
+import EmployeeApplications from '../pages/EmployeeApplications';
 
 const Home = lazy(() => import('../pages/Home'));
 const Signup = lazy(() => import('../pages/Signup'));
@@ -14,6 +15,7 @@ const NotAccessiblePage = lazy(() => import('../pages/NotAccessible'));
 const NotFoundpage = lazy(() => import('../pages/NotFound'));
 const CV = lazy(() => import('../pages/CV'));
 const JobMatchList = lazy(() => import('../pages/JobmatchListingsPage'));
+const EmpApplications = lazy(() => import('../pages/EmployeeApplications'));
 
 const Loading = () => <div>Loading...</div>;
 
@@ -87,6 +89,7 @@ const AppRoutes = () => {
             <>
             <Route path="CVBuild" element={<CV />} />
             <Route path="jobmatch" element={<JobMatchList />} />
+            <Route path="emapplications" element={<EmpApplications />} />
             </>
           ) : null}
         </Route>

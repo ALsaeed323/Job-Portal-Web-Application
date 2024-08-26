@@ -51,7 +51,7 @@ const Sidebar = () => {
     },
     {
       title: "Applications",
-      href: "/dashboard/badges",
+      href: "/dashboard/emapplications",
       icon: "bi bi-patch-check",
     },
     {

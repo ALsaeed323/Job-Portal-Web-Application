@@ -41,6 +41,16 @@ const applyForJob = async (jobId, employeeId) => {
     throw error.response?.data || error.message;
   }
 };
+const getEmployeeApplications = async (employeeId) => {
+  try {
+    const response = await axios.get(`${API_URL}/${employeeId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Fetching applications failed:', error.response?.data || error.message);
+    throw error.response?.data || error.message;
+  }
+};
+
 
 
 
@@ -49,5 +59,6 @@ export default {
   getAllJobs,
   jobMatching,
   applyForJob,
+  getEmployeeApplications,
  
 };
