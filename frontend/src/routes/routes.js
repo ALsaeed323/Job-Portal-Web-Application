@@ -16,6 +16,7 @@ const NotFoundpage = lazy(() => import('../pages/NotFound'));
 const CV = lazy(() => import('../pages/CV'));
 const JobMatchList = lazy(() => import('../pages/JobmatchListingsPage'));
 const EmpApplications = lazy(() => import('../pages/EmployeeApplications'));
+const Applications = lazy(() => import('../pages/EmployerApplications'));
 
 const Loading = () => <div>Loading...</div>;
 
@@ -83,6 +84,7 @@ const AppRoutes = () => {
             <>
               <Route path="jobslist" element={<JobList />} />
               <Route path="Createposting" element={<CreateJobPosting />} />
+              <Route path="applications" element={<Applications />} />
             </>
           ) : null}
           {user && user.userType === "employee" ? (

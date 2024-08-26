@@ -50,6 +50,26 @@ const getEmployeeApplications = async (employeeId) => {
     throw error.response?.data || error.message;
   }
 };
+const getEmployerApplications = async (employerId) => {
+  try {
+    const response = await axios.get(`${API_URL}/employer/${employerId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Fetching applications failed:', error.response?.data || error.message);
+    throw error.response?.data || error.message;
+  }
+};
+
+const updateApplicationStatus = async (applicationId, status) => {
+  try {
+    const response = await axios.put(`${API_URL}/${applicationId}/status`, { status });
+    return response.data;
+  } catch (error) {
+    console.error('Updating application status failed:', error.response?.data || error.message);
+    throw error.response?.data || error.message;
+  }
+};
+
 
 
 
@@ -60,5 +80,7 @@ export default {
   jobMatching,
   applyForJob,
   getEmployeeApplications,
+  getEmployerApplications,
+  updateApplicationStatus,
  
 };

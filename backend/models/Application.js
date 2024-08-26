@@ -2,9 +2,9 @@
 import mongoose from 'mongoose';
 
 const applicationSchema = new mongoose.Schema({
-  jobId: { type: mongoose.Schema.Types.ObjectId, ref: 'Job', required: true },
   employeeId: { type: mongoose.Schema.Types.ObjectId, ref: 'Employee', required: true },
-  status: { type: String, default: 'pending' }, // e.g., pending, accepted, rejected
+  jobId: { type: mongoose.Schema.Types.ObjectId, ref: 'Job', required: true },
+  status: { type: String, enum: ['Pending', 'Accepted', 'Denied'], default: 'Pending' },
   appliedAt: { type: Date, default: Date.now },
 });
 

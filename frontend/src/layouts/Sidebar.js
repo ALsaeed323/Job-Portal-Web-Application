@@ -35,7 +35,7 @@ const Sidebar = () => {
     },
     {
       title: "Applications",
-      href: "/dashboard/badges",
+      href: "/dashboard/applications",
       icon: "bi bi-file-earmark-text",
     },
   ] : user?.userType === "employee" ? [
