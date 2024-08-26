@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem("user");
       localStorage.removeItem('sessionToken');
   
-      navigate("/signin-employer");
+      navigate("/home");
     } catch (error) {
       console.error("Logout failed:", error);
       throw error;
