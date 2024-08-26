@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Nav, Container, Button } from 'react-bootstrap';
+import { Navbar, Nav, Container, Dropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Logo from '../Logo';
 
@@ -17,9 +17,22 @@ const NavigationBar = () => {
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/features">Features</Nav.Link>
             <Nav.Link as={Link} to="/about">About</Nav.Link>
-            <Button as={Link} to="/get-started" variant="outline-primary">
-              Get Started
-            </Button>
+            
+            <Dropdown>
+              <Dropdown.Toggle variant="outline-primary" id="dropdown-signin">
+                Sign In
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item as={Link} to="/signin-employer">
+                  Sign in as Employer
+                </Dropdown.Item>
+                <Dropdown.Item as={Link} to="/signin-employee">
+                  Sign in as Employee
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            
           </Nav>
         </Navbar.Collapse>
       </Container>

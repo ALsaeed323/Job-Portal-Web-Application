@@ -105,3 +105,28 @@ export const signinEmployee = async (req, res) => {
       res.status(200).json({ message: 'Server error' });
     }
 };
+export const logout = async (req, res) => {
+  try {
+    const { sessionToken } = req.body;
+    
+    if (!sessionToken) {
+      return res.status(400).json({ message: "Session ID is required" });
+    }
+
+    const session = await Session.findOneAndUpdate(
+      {sessionId: sessionToken },
+      { status: "inactive", lastAccess: new Date() },
+      { new: true }
+    );
+
+    if (!session) {
+      console.log('Session not found for token:', sessionToken);
+      return res.status(404).json({ message: "Session not found" });
+    }
+
+    res.status(200).json({ message: "Logout successful" });
+  } catch (error) {
+    console.error('Error during logout:', error);
+    res.status(500).json({ message: "Server error", error });
+  }
+};

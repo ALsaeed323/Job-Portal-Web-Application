@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 import Logo from '../../Logo';
-import { useAuth } from '../../../context/EmployerContext'; // Import the Auth context
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../context/EmployerContext';
 
 export default function EmployerSigninForm() {
   const [formData, setFormData] = useState({
@@ -88,7 +88,7 @@ export default function EmployerSigninForm() {
                   <div className="mt-3">
                     <p className="mb-0 text-center">
                       Don't have an account?{' '}
-                      <a href="/signup" className="text-primary fw-bold">
+                      <a href="/signup-employer" className="text-primary fw-bold">
                         Sign Up
                       </a>
                     </p>

@@ -3,6 +3,7 @@ import CreatableSelect from 'react-select/creatable';
 import { InputGroup, Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
 import './EmployeeSignupForm.css';
 import Logo from '../../Logo';
+import { useNavigate } from 'react-router-dom';
 import employeeService from '../../../services/EmployeeService'; // Import the service
 
 const skillsOptions = [
@@ -11,7 +12,6 @@ const skillsOptions = [
   { value: 'Node.js', label: 'Node.js' },
   { value: 'Python', label: 'Python' },
   { value: 'SQL', label: 'SQL' },
-  // Add more skills as needed
 ];
 
 const EmployeeSignupForm = () => {
@@ -26,6 +26,7 @@ const EmployeeSignupForm = () => {
     professionalSummary: '',
   });
 
+  const navigate = useNavigate();
   const handleSkillsChange = (newValue, actionMeta) => {
     setSelectedSkills(newValue || []);
   };
@@ -58,7 +59,7 @@ const EmployeeSignupForm = () => {
     try {
       const response = await employeeService.signupEmployee(employeeData);
       alert('Employee signed up successfully!');
-      // Optionally, reset form here
+      navigate('/');
     } catch (error) {
       console.error('Error signing up employee:', error);
       alert('Failed to sign up. Please try again.');

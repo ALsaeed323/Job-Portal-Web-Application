@@ -23,6 +23,11 @@ const navigation = [
     href: "/dashboard/badges",
     icon: "bi bi-patch-check",
   },
+  {
+    title: "CVBuild",
+    href: "/dashboard/CVBuild",
+    icon: "bi bi-patch-check",
+  },
 ];
 
 const Sidebar = () => {
