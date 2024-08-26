@@ -54,6 +54,11 @@ const Sidebar = () => {
       href: "/dashboard/badges",
       icon: "bi bi-patch-check",
     },
+    {
+      title: "Job Recommendations ",
+      href: "/dashboard/jobmatch",
+      icon: "bi bi-patch-check",
+    },
   ] : [];
 
   return (

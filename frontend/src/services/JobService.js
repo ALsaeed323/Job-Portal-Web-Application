@@ -23,11 +23,31 @@ const getAllJobs = async () => {
     throw error.response?.data || error.message;
   }
 };
+const jobMatching = async (employeeId) => {
+  try {
+    const response = await axios.get(`${API_URL}/match/${employeeId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Job matching failed:', error.response?.data || error.message);
+    throw error.response?.data || error.message;
+  }
+};
+const applyForJob = async (jobId, employeeId) => {
+  try {
+    const response = await axios.post(`${API_URL}/apply`, { jobId, employeeId });
+    return response.data;
+  } catch (error) {
+    console.error('Job application failed:', error.response?.data || error.message);
+    throw error.response?.data || error.message;
+  }
+};
 
 
 
 export default {
   createJob,
   getAllJobs,
+  jobMatching,
+  applyForJob,
  
 };

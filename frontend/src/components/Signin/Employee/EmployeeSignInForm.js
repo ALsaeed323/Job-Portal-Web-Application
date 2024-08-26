@@ -7,7 +7,7 @@ import { useAuth } from '../../../context/EmployeeContext'; // Import the Auth c
 
 const EmployeeSignInForm = () => {
 
-console.log("sssssssssssssssssssssssssss")
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -87,6 +87,14 @@ console.log("sssssssssssssssssssssssssss")
               </Button>
             </div>
           </Form>
+          <div className="mt-3">
+                    <p className="mb-0 text-center">
+                      Don't have an account?{' '}
+                      <a href="/signup-employee" className="text-primary fw-bold">
+                        Sign Up
+                      </a>
+                    </p>
+                  </div>
         </div>
       </div>
     </>
