@@ -31,6 +31,15 @@ const JobListingsPage = () => {
     fetchJobsAndApplications();
   }, [user._id]);
 
+  const handleApply = async (jobId) => {
+    try {
+      await JobService.applyForJob(jobId, user._id);
+      alert('Application submitted successfully');
+    } catch (error) {
+      console.error('Error applying for job:', error);
+      alert(error.response?.data?.message || 'An error occurred while applying.');
+    }
+  };
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -63,8 +72,13 @@ const JobListingsPage = () => {
                 <td>{job.requirements}</td>
                 <td>{job.applicationDeadline || 'N/A'}</td>
                 <td>
-                  {/* Apply button logic can go here */}
-                  <Button variant="primary">Apply</Button>
+                  <Button
+                    variant="primary"
+                    onClick={() => handleApply(job._id)}
+                    disabled={job.applied} // Optionally disable if already applied
+                  >
+                    Apply
+                  </Button>
                 </td>
               </tr>
             ))}

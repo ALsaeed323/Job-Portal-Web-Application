@@ -65,7 +65,7 @@ const EmployerApplications = () => {
                 <td>{application.jobId.title}</td>
                 <td>{application.status}</td>
                 <td>
-                  {application.status !== 'Pending' && (
+                  {application.status === 'Pending' && (
                     <>
                       <Button
                         variant="success"
