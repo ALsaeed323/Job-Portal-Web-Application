@@ -9,10 +9,18 @@ const JobListingsPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchJobs = async () => {
+    const fetchJobsAndApplications = async () => {
       try {
         const userJobs = await JobService.jobMatching(user._id);
-        setJobs(userJobs);
+        const employeeApplications = await JobService.getEmployeeApplications(user._id);
+
+        // Extract job IDs from the employee applications
+        const appliedJobIds = employeeApplications.map(application => application.jobId._id);
+
+        // Filter out the jobs that have already been applied to
+        const filteredJobs = userJobs.filter(job => !appliedJobIds.includes(job._id));
+
+        setJobs(filteredJobs);
       } catch (error) {
         console.error('Error fetching jobs:', error);
       } finally {
@@ -20,18 +28,8 @@ const JobListingsPage = () => {
       }
     };
 
-    fetchJobs();
+    fetchJobsAndApplications();
   }, [user._id]);
-
-  const handleApply = async (jobId) => {
-    try {
-      await JobService.applyForJob(jobId, user._id);
-      alert('Application submitted successfully');
-    } catch (error) {
-      console.error('Error applying for job:', error);
-      alert(error.response?.data?.message || 'An error occurred while applying.');
-    }
-  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -65,13 +63,8 @@ const JobListingsPage = () => {
                 <td>{job.requirements}</td>
                 <td>{job.applicationDeadline || 'N/A'}</td>
                 <td>
-                  <Button
-                    variant="primary"
-                    onClick={() => handleApply(job._id)}
-                    disabled={job.applied} // Optionally disable if already applied
-                  >
-                    Apply
-                  </Button>
+                  {/* Apply button logic can go here */}
+                  <Button variant="primary">Apply</Button>
                 </td>
               </tr>
             ))}

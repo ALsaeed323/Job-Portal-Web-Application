@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Form, Button, Col } from 'react-bootstrap';
+import { Form, Button, Col, Row } from 'react-bootstrap';
 import jsPDF from 'jspdf';
 import { useAuth } from '../../context/EmployerContext';
-import { Row } from 'react-bootstrap';
 import './CVBuilderForm.css';
 
 const CVBuilderForm = () => {
@@ -15,7 +14,6 @@ const CVBuilderForm = () => {
         skills: [],
         experiences: [],
         education: [],
-        companyData: '',
     });
 
     const handleChange = (e) => {
@@ -41,32 +39,69 @@ const CVBuilderForm = () => {
 
     const handleDownload = () => {
         const doc = new jsPDF();
-        doc.text(`CV of ${formData.fullName}`, 10, 10);
-        doc.text(`Email: ${formData.email}`, 10, 20);
-        doc.text(`Phone: ${formData.phoneNumber}`, 10, 30);
-        doc.text(`Summary: ${formData.professionalSummary}`, 10, 40);
-        doc.text(`Skills: ${formData.skills.join(', ')}`, 10, 50);
 
-        // Adding experiences
-        let yPosition = 60;
+        // Header
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(22);
+        doc.text(formData.fullName, 105, 20, null, null, "center");
+
+        doc.setFontSize(12);
+        doc.setFont("helvetica", "normal");
+        doc.text(`${formData.phoneNumber} | ${formData.email}`, 105, 30, null, null, "center");
+        
+        // Professional Summary
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(16);
+        doc.text("PROFESSIONAL SUMMARY", 10, 50);
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(12);
+        doc.text(doc.splitTextToSize(formData.professionalSummary, 190), 10, 60);
+
+        // Skills
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(16);
+        doc.text("TECHNICAL SKILLS", 10, 80);
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(12);
+        doc.text(doc.splitTextToSize(formData.skills.join(', '), 190), 10, 90);
+
+        // Experience
+        let yPosition = 110;
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(16);
+        doc.text("EXPERIENCE", 10, yPosition);
+        
         formData.experiences.forEach((exp, index) => {
-            doc.text(`Experience ${index + 1}:`, 10, yPosition);
-            doc.text(`Job Title: ${exp.jobTitle}`, 10, yPosition + 10);
-            doc.text(`Company: ${exp.companyName}`, 10, yPosition + 20);
-            doc.text(`Start Date: ${exp.startDate}`, 10, yPosition + 30);
-            doc.text(`End Date: ${exp.endDate}`, 10, yPosition + 40);
-            doc.text(`Description: ${exp.description}`, 10, yPosition + 50);
-            yPosition += 60;
+            yPosition += 10;
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(14);
+            doc.text(`${exp.jobTitle} | ${exp.companyName}`, 10, yPosition);
+
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(12);
+            doc.text(`Start Date: ${exp.startDate} - End Date: ${exp.endDate}`, 10, yPosition + 10);
+            doc.text(doc.splitTextToSize(exp.description, 190), 10, yPosition + 20);
+            yPosition += 40; // Add more spacing between experiences
         });
 
-        // Adding education
+        // Education
         yPosition += 10; // Add a little space before starting the education section
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(16);
+        doc.text("EDUCATION", 10, yPosition);
+
         formData.education.forEach((edu, index) => {
-            doc.text(`Education ${index + 1}:`, 10, yPosition);
-            doc.text(`Institution: ${edu.institutionName}`, 10, yPosition + 10);
-            doc.text(`Degree: ${edu.degree}`, 10, yPosition + 20);
-            doc.text(`Graduation Year: ${edu.graduationYear}`, 10, yPosition + 30);
-            yPosition += 40;
+            yPosition += 10;
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(14);
+            doc.text(`${edu.institutionName} | ${edu.degree}`, 10, yPosition);
+
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(12);
+            doc.text(`Graduation Year: ${edu.graduationYear}`, 10, yPosition + 10);
+            yPosition += 20;
         });
 
         doc.save(`${formData.fullName}_CV.pdf`);
