@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Table, Button } from 'react-bootstrap';
 import JobService from '../../services/JobService';
 import { useAuth } from '../../context/EmployeeContext';
+import '../../components/Job/EmployeeApplications.css';
 
 const JobListingsPage = () => {
   const { user } = useAuth();
@@ -45,6 +46,7 @@ const JobListingsPage = () => {
   }
 
   return (
+    <div className="gradient-background">
     <Container>
       <h1>Job Listings</h1>
       {jobs.length > 0 ? (
@@ -88,6 +90,7 @@ const JobListingsPage = () => {
         <p>No job postings found.</p>
       )}
     </Container>
+    </div>
   );
 };
 

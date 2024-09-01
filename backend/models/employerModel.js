@@ -1,14 +1,15 @@
 import mongoose from 'mongoose';
 
 const EmployerSchema = new mongoose.Schema({
-  companyName: { type: String, required: true },
-  companyDescription: { type: String },
-  specialties: { type: String, required: true },
-  phoneNumber: { type: String },
   email: { type: String, unique: true, required: true },
+  password: { type: String, required: true },
+  companyName: { type: String },
+  companyDescription: { type: String },
+  specialties: { type: String },
+  phoneNumber: { type: String },
   address: { type: String },
-  password: { type: String, required: true }, // Add the password field
-  userType: { type: String, default: 'employer' }, // Add userType with default value
+  userType: { type: String, default: 'employer' },
+  profileCompleted: { type: Boolean, default: false }, // New field to track profile completion
   createdAt: { type: Date, default: Date.now },
 });
 

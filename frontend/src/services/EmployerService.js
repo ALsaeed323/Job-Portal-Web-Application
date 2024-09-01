@@ -3,15 +3,35 @@ import axios from 'axios';
 // Adjust the API URL to point to your local backend
 const API_URL = 'http://localhost:4000/api/employers';
 
-const signupEmployer = async (employerData) => {
-    try {
-      const response = await axios.post(`${API_URL}/signup`, employerData);
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  };
+// const signupEmployer = async (employerData) => {
+//     try {
+//       const response = await axios.post(`${API_URL}/signup`, employerData);
+//       return response.data;
+//     } catch (error) {
+//       throw error.response.data;
+//     }
+//   };
   
+const signupEmployerInitial = async (formData) => {
+  try {
+    const response = await axios.post(`${API_URL}/signup-initial`, formData);
+    return response.data;
+  } catch (error) {
+    console.error('Error during initial signup:', error.response?.data || error.message);
+    throw error.response?.data || error.message;
+  }
+};
+
+// Function to complete the employer profile
+const completeEmployerProfile = async (formData) => {
+  try {
+    const response = await axios.post(`${API_URL}/complete-profile`, formData);
+    return response.data;
+  } catch (error) {
+    console.error('Error during profile completion:', error.response?.data || error.message);
+    throw error.response?.data || error.message;
+  }
+};
   const signinEmployer = async (employerData) => {
     try {
       const response = await axios.post(`${API_URL}/signin`, employerData);
@@ -23,7 +43,6 @@ const signupEmployer = async (employerData) => {
   const logoutEmployer = async (sessionToken) => {
     try {
     
-      console.log("heloooooooooooooooo"+sessionToken)
       const response = await axios.post(`${API_URL}/logout`, { sessionToken });
       return response.data;
     } catch (error) {
@@ -32,7 +51,8 @@ const signupEmployer = async (employerData) => {
     }
   };
   export default {
-    signupEmployer,
+    signupEmployerInitial,
+  completeEmployerProfile,
     signinEmployer,
     logoutEmployer,
   };

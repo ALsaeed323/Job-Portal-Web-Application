@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes, useLocation, useNavigate } from
 import FullLayout from '../layouts/FullLayout';
 import { useAuth as useEmployerAuth } from '../context/EmployerContext';
 import { useAuth as useEmployeeAuth } from '../context/EmployeeContext';
-import EmployeeApplications from '../pages/EmployeeApplications';
 
 const Home = lazy(() => import('../pages/Home'));
 const Signup = lazy(() => import('../pages/Signup'));
@@ -35,7 +34,11 @@ const AppRoutes = () => {
 
     const redirectToDashboard = () => {
       if (user && (user.userType === "employer" || user.userType === "employee")) {
-        navigate('/dashboard');
+        if (user.userType === "employer" && !user.profileCompleted) {
+          navigate('/complete-employer-profile'); // Redirect to profile completion
+        } else {
+          navigate('/dashboard');
+        }
       }
     };
 
@@ -44,7 +47,7 @@ const AppRoutes = () => {
         navigate('/signin-employer');
       } else if (location.pathname.startsWith('/signin-employee')) {
         navigate('/signin-employee');
-      } else if (!['/signup-employee', '/signup-employer'].includes(location.pathname)) {
+      } else if (!['/signup-employee', '/signup-employer', '/signup-employer-initial'].includes(location.pathname)) {
         navigate('/home'); // Redirect to home or a default page
       }
     };
@@ -52,7 +55,7 @@ const AppRoutes = () => {
     if (user) {
       if (location.pathname === '/') {
         redirectToDashboard();
-      } else if (['/signin-employer', '/signin-employee', '/signup', '/signup-employee', '/signup-employer'].includes(location.pathname)) {
+      } else if (['/signin-employer', '/signin-employee', '/signup', '/signup-employee', '/signup-employer-initial'].includes(location.pathname)) {
         redirectToDashboard();
       }
     } else {
@@ -70,9 +73,10 @@ const AppRoutes = () => {
     <Suspense fallback={<Loading />}>
       <Routes>
         <Route path="/" element={<Home />} />    {/* Root path '/' leads to Home */}
-        <Route path="/home" element={<Home />} /> {/* '/home' path also leads to Home */}
+        <Route path="/home" element={<Home />} />
         <Route path="/signup-employee" element={<Signup />} />
-        <Route path="/signup-employer" element={<Signup />} />
+        <Route path="/signup-employer-initial" element={<Signup />} />
+        <Route path="/complete-employer-profile" element={<Signup />} />
         <Route path="/signin-employee" element={<Signin />} />
         <Route path="/signin-employer" element={<Signin />} />
         <Route path="/about" element={<About />} />
@@ -89,9 +93,9 @@ const AppRoutes = () => {
           ) : null}
           {user && user.userType === "employee" ? (
             <>
-            <Route path="CVBuild" element={<CV />} />
-            <Route path="jobmatch" element={<JobMatchList />} />
-            <Route path="emapplications" element={<EmpApplications />} />
+              <Route path="CVBuild" element={<CV />} />
+              <Route path="jobmatch" element={<JobMatchList />} />
+              <Route path="emapplications" element={<EmpApplications />} />
             </>
           ) : null}
         </Route>

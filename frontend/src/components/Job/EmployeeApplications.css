@@ -1,5 +1,5 @@
 .gradient-background {
-    background: linear-gradient(to bottom, #212A31, #2E3944, #124E66, #748D92, #D3D9D4);
+    background: linear-gradient(to bottom, #D3D9D4, #D3D9D4, #124E66, #2E3944, #212A31);
     display: flex;
     align-items: center; /* Center vertically */
     justify-content: center; /* Center horizontally */

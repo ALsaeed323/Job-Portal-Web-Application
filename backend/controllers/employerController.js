@@ -8,36 +8,91 @@ dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET 
 
-export const signupEmployer = async (req, res) => {
-  try {
-    const { companyName, companyDescription, specialties, phoneNumber, email, address, password } = req.body;
+// export const signupEmployer = async (req, res) => {
+//   try {
+//     const { companyName, companyDescription, specialties, phoneNumber, email, address, password } = req.body;
 
-    // Check if employer already exists
+//     // Check if employer already exists
+//     const existingEmployer = await Employer.findOne({ email });
+//     if (existingEmployer) {
+//       return res.status(400).json({ message: 'Employer with this email already exists' });
+//     }
+
+//     // Hash the password before saving
+//     const hashedPassword = await bcrypt.hash(password, 10);
+
+//     const newEmployer = new Employer({
+//       companyName,
+//       companyDescription,
+//       specialties,
+//       phoneNumber,
+//       email,
+//       address,
+//       password: hashedPassword, // Store the hashed password
+//     });
+
+//     await newEmployer.save();
+//     res.status(201).json({ message: 'Employer signed up successfully!', employer: newEmployer });
+//   } catch (error) {
+//     console.error('Error signing up employer:', error);
+//     res.status(500).json({ message: 'Server error' });
+//   }
+// };
+export const signupEmployerInitial = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Check if the employer already exists
     const existingEmployer = await Employer.findOne({ email });
     if (existingEmployer) {
-      return res.status(400).json({ message: 'Employer with this email already exists' });
+      return res.status(400).json({ message: 'Employer already exists with this email' });
     }
 
-    // Hash the password before saving
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 12);
 
+    // Create new employer with only email and hashed password
     const newEmployer = new Employer({
-      companyName,
-      companyDescription,
-      specialties,
-      phoneNumber,
       email,
-      address,
-      password: hashedPassword, // Store the hashed password
+      password: hashedPassword,
+      profileCompleted: false, // Initial signup, so the profile is not complete
     });
 
     await newEmployer.save();
-    res.status(201).json({ message: 'Employer signed up successfully!', employer: newEmployer });
+
+    res.status(201).json({ message: 'Initial signup successful', employerId: newEmployer._id });
   } catch (error) {
-    console.error('Error signing up employer:', error);
-    res.status(500).json({ message: 'Server error' });
+    console.error('Error during initial signup:', error);
+    res.status(500).json({ message: 'Server error during initial signup' });
   }
 };
+
+// Controller function to complete employer profile
+export const completeEmployerProfile = async (req, res) => {
+  const { employerId, companyName, companyDescription, specialties, phoneNumber, address } = req.body;
+
+  try {
+    const employer = await Employer.findById(employerId);
+    if (!employer) {
+      return res.status(404).json({ message: 'Employer not found' });
+    }
+
+    employer.companyName = companyName;
+    employer.companyDescription = companyDescription;
+    employer.specialties = specialties;
+    employer.phoneNumber = phoneNumber;
+    employer.address = address;
+    employer.profileCompleted = true;
+
+    await employer.save();
+
+    res.status(200).json({ message: 'Profile completed successfully' });
+  } catch (error) {
+    console.error('Error during profile completion:', error);
+    res.status(500).json({ message: 'Server error during profile completion' });
+  }
+};
+
 export const signinEmployer = async (req, res) => {
   try {
     const { email, password } = req.body;
