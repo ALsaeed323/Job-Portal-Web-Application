@@ -9,7 +9,6 @@ import { useAuth } from '../../../context/EmployerContext'; // Import your conte
 export default function EmployerProfileCompletionForm() {
   // Get the employerId from the context
   const { user } = useAuth();
-  console.log(user);
   const employerId = user ? user._id : null; // Adjust based on your context data structure
 
   const [formData, setFormData] = useState({

@@ -35,7 +35,9 @@ const AppRoutes = () => {
     const redirectToDashboard = () => {
       if (user && (user.userType === "employer" || user.userType === "employee")) {
         if (user.userType === "employer" && !user.profileCompleted) {
-          navigate('/complete-employer-profile'); // Redirect to profile completion
+          navigate('/complete-employer-profile'); // Redirect to employer profile completion
+        } else if (user.userType === "employee" && !user.profileCompleted) {
+          navigate('/complete-employee-profile'); // Redirect to employee profile completion
         } else {
           navigate('/dashboard');
         }
@@ -47,7 +49,7 @@ const AppRoutes = () => {
         navigate('/signin-employer');
       } else if (location.pathname.startsWith('/signin-employee')) {
         navigate('/signin-employee');
-      } else if (!['/signup-employee', '/signup-employer', '/signup-employer-initial'].includes(location.pathname)) {
+      } else if (!['/signup-employee-initial',  '/signup-employer-initial'].includes(location.pathname)) {
         navigate('/home'); // Redirect to home or a default page
       }
     };
@@ -68,13 +70,13 @@ const AppRoutes = () => {
   if (initialLoading || loading) {
     return <Loading />; // Display loading indicator while checking user state
   }
-
   return (
     <Suspense fallback={<Loading />}>
       <Routes>
         <Route path="/" element={<Home />} />    {/* Root path '/' leads to Home */}
         <Route path="/home" element={<Home />} />
-        <Route path="/signup-employee" element={<Signup />} />
+        <Route path="/signup-employee-initial" element={<Signup />} />
+        <Route path="/complete-employee-profile" element={<Signup />} />
         <Route path="/signup-employer-initial" element={<Signup />} />
         <Route path="/complete-employer-profile" element={<Signup />} />
         <Route path="/signin-employee" element={<Signin />} />

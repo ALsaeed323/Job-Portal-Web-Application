@@ -8,36 +8,56 @@ dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET 
 
-export const signupEmployee = async (req, res) => {
+export const signupEmployeeInitial = async (req, res) => {
+  const { fullName, email, password } = req.body;
   try {
-    const { fullName, email, password, phoneNumber, professionalSummary, skills, experiences, education } = req.body;
-
-    // Check if employee already exists
-    const existingEmployee = await Employee.findOne({ email });
-    if (existingEmployee) {
-      return res.status(200).json({ message: 'Employee with this email already exists' });
-    }
-
-    // Create a new employee
-    const newEmployee = new Employee({
-      fullName,
-      email,
-      password,
-      phoneNumber,
-      professionalSummary,
-      skills,
-      experiences,
-      education,
-    });
-
+    // Create a new employee record with only the initial required fields
+    const newEmployee = new Employee({ fullName, email, password, profileCompleted: false }); // Set profileCompleted to false
     await newEmployee.save();
-
-    res.status(201).json({ message: 'Employee signed up successfully!', employee: newEmployee });
+    res.status(201).json({ message: 'Employee initial signup successful', employeeId: newEmployee._id });
   } catch (error) {
-    console.error('Error signing up employee:', error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(400).json({ message: 'Error during initial signup', error });
   }
 };
+
+// Complete the employee profile with additional details
+export const completeEmployeeProfile = async (req, res) => {
+  const { employeeId, phoneNumber, professionalSummary, skills, experiences, education } = req.body;
+
+  // Check if employeeId is provided
+  if (!employeeId) {
+    return res.status(400).json({ message: 'Employee ID is required' });
+  }
+
+  try {
+    // Find the employee by ID
+    const employee = await Employee.findById(employeeId);
+    
+    // If employee is not found, return a 404 error
+    if (!employee) {
+      return res.status(404).json({ message: 'Employee not found' });
+    }
+
+    // Update the employee with the additional profile details
+    employee.phoneNumber = phoneNumber || employee.phoneNumber;
+    employee.professionalSummary = professionalSummary || employee.professionalSummary;
+    employee.skills = skills && skills.length > 0 ? skills : employee.skills;
+    employee.experiences = experiences && experiences.length > 0 ? experiences : employee.experiences;
+    employee.education = education && education.length > 0 ? education : employee.education;
+    employee.profileCompleted = true; // Set profileCompleted to true
+
+    // Save the updated employee
+    await employee.save();
+
+    res.status(200).json({ message: 'Profile completed successfully' });
+
+  } catch (error) {
+    // Log the error and send a 400 status with error message
+    console.error('Error during profile completion:', error);
+    res.status(500).json({ message: 'Error during profile completion', error: error.message });
+  }
+};
+
 export const signinEmployee = async (req, res) => {
     try {
       const { email, password } = req.body;

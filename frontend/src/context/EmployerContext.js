@@ -61,6 +61,7 @@ export const AuthProvider = ({ children }) => {
   
       await employerService.logoutEmployer(sessionToken);
   
+      console.log("ppppppppppppppppppppppppppppppppppppp");
       setUser(null);
       localStorage.removeItem("user");
       localStorage.removeItem('sessionToken');

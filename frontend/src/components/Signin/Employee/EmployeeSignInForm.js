@@ -90,7 +90,7 @@ const EmployeeSignInForm = () => {
           <div className="mt-3">
                     <p className="mb-0 text-center">
                       Don't have an account?{' '}
-                      <a href="/signup-employee" className="text-primary fw-bold">
+                      <a href="/signup-employee-initial" className="text-primary fw-bold">
                         Sign Up
                       </a>
                     </p>

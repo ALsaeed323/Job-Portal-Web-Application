@@ -24,7 +24,8 @@ const employeeSchema = new mongoose.Schema({
       graduationYear: { type: Number, required: true },
     },
   ],
-  userType: { type: String, default: 'employee' }, // Add userType with default value
+  userType: { type: String, default: 'employee' }, // Default user type
+  profileCompleted: { type: Boolean, default: false }, // New field to track profile completion
 }, { timestamps: true });
 
 // Middleware to hash password before saving
