@@ -25,7 +25,7 @@ const AppRoutes = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [initialLoading, setInitialLoading] = useState(true);
-
+  const url = location.pathname;
   const user = employerUser || employeeUser;
   const loading = employerLoading || employeeLoading;
 
@@ -33,16 +33,23 @@ const AppRoutes = () => {
     if (loading) return; // Wait until the loading is complete
 
     const redirectToDashboard = () => {
+      // First handle unauthenticated cases
+      if (handleUnauthenticated()) {
+        return; // Exit the function if the user is not authenticated
+      }
+    
+      // Check if the user exists and their type is either "employer" or "employee"
       if (user && (user.userType === "employer" || user.userType === "employee")) {
         if (user.userType === "employer" && !user.profileCompleted) {
           navigate('/complete-employer-profile'); // Redirect to employer profile completion
         } else if (user.userType === "employee" && !user.profileCompleted) {
           navigate('/complete-employee-profile'); // Redirect to employee profile completion
         } else {
-          navigate('/dashboard');
+          navigate('/dashboard'); // Redirect to dashboard
         }
       }
     };
+    
 
     const handleUnauthenticated = () => {
       if (location.pathname.startsWith('/signin-employer')) {
@@ -70,6 +77,7 @@ const AppRoutes = () => {
   if (initialLoading || loading) {
     return <Loading />; // Display loading indicator while checking user state
   }
+  console.log(url)
   return (
     <Suspense fallback={<Loading />}>
       <Routes>

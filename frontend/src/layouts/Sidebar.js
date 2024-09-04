@@ -19,8 +19,8 @@ const Sidebar = () => {
   // Define the navigation based on the user type
   const navigation = user?.userType === "employer" ? [
     {
-      title: "Dashboard",
-      href: "/dashboard",
+      title: "Home",
+      href: "/home",
       icon: "bi bi-speedometer2",
     },
     {

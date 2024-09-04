@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Col, Button, Form } from 'react-bootstrap';
 import './EmployeeSignInForm.css';
-import Logo from '../../Logo';
+import NavigationBar from '../../nav/nav';
 import { useAuth } from '../../../context/EmployeeContext'; // Import the Auth context
 
 
@@ -39,7 +39,7 @@ const EmployeeSignInForm = () => {
 
   return (
     <>
-      <Logo />
+       <NavigationBar /> 
       <div className="gradient-background">
         <div className="form-container">
           <h2 className="fw-bold text-uppercase mb-4 text-center">Employee Sign-In</h2>

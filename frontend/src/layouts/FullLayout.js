@@ -8,7 +8,8 @@ const FullLayout = () => {
     <main>
       {/********header**********/}
       <Header />
-      <div className="pageWrapper d-lg-flex">
+      <div className="pageWrapper d-lg-flex" style={{ backgroundColor: '#D9D8D3' }}>
+
         {/********Sidebar**********/}
         <aside className="sidebarArea shadow" id="sidebarArea">
           <Sidebar />

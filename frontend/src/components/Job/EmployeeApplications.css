@@ -1,8 +1,16 @@
 .gradient-background {
-    background: linear-gradient(to bottom, #D3D9D4, #D3D9D4, #124E66, #2E3944, #212A31);
+    background-color: #72986f;
     display: flex;
     align-items: center; /* Center vertically */
     justify-content: center; /* Center horizontally */
     padding: 20px;
-    margin-left: 300px ;
+    margin-left: 400px ;
+}
+.gradient-backgrounde {
+    background-color: #72986f;
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    padding: 20px;
+    margin-left: 400px ;
 }

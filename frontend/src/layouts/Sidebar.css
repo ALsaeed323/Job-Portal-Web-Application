@@ -1,4 +1,17 @@
 .custom-margin-top {
-    padding-bottom: 800px;
+    padding-bottom: 600px;
+  }
+ 
+  .nav-link {
+    color: white !important; /* Default color */
+    font-size: 16px;
   }
   
+  .nav-link:hover {
+    color: #16df38 !important; /* Red color on hover */
+    text-decoration: none; /* Remove underline */
+  }
+  
+  .active.nav-link {
+    color: #16df38 !important; /* Red color for active links */
+  }

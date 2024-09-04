@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Col, Button, Row, Container, Card, Form } from 'react-bootstrap';
-import Logo from '../../Logo';
+import NavigationBar from '../../nav/nav';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../context/EmployerContext';
 
@@ -39,7 +39,7 @@ export default function EmployerSigninForm() {
 
   return (
     <>
-     <Logo />
+     <NavigationBar />
     <div className="gradient-background">
      
       <Container>
