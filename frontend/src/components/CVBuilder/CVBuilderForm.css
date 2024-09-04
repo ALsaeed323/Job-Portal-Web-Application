@@ -6,7 +6,7 @@
     align-items: center; /* Center vertically */
     justify-content: center; /* Center horizontally */
     padding: 50px;
-    margin-left: 400px ;
+    margin-left: 300px ;
 }
 
 .form-container {
@@ -14,7 +14,7 @@
     padding: 40px; /* Increased padding for better form layout */
     border-radius: 10px; /* Slightly increased border-radius for smoother edges */
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow for depth */
-    max-width: 500px; /* Set a max-width to make the form more compact */
+    max-width: 650px; /* Set a max-width to make the form more compact */
     width: 100%;
 }
 

@@ -46,7 +46,7 @@ const JobListingsPage = () => {
   }
 
   return (
-    <div className="gradient-background">
+    <div className="gradient-backgroundeee">
     <Container>
       <h1>Job Listings</h1>
       {jobs.length > 0 ? (

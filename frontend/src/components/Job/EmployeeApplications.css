@@ -14,3 +14,11 @@
     padding: 20px;
     margin-left: 400px ;
 }
+.gradient-backgroundd {
+    background-color: #72986f;
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    padding: 20px;
+    margin-left: 400px ;
+}

@@ -40,8 +40,8 @@ const Sidebar = () => {
     },
   ] : user?.userType === "employee" ? [
     {
-      title: "Dashboard",
-      href: "/dashboard",
+      title: "Home",
+      href: "/home",
       icon: "bi bi-speedometer2",
     },
     {

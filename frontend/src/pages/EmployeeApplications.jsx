@@ -30,7 +30,7 @@ const EmployeeApplications = () => {
   }
 
   return (
-    <div className="gradient-background">
+    <div className="gradient-backgroundd">
     <Container>
       <h1>Your Applications</h1>
       {applications.length > 0 ? (
