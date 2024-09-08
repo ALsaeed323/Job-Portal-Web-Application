@@ -30,9 +30,6 @@ export const AuthProvider = ({ children }) => {
     try {
       let response;
       response = await employerService.signinEmployer(userData);
-
-  
-
       setUser(response.employer);
       localStorage.setItem("sessionToken", response.sessionToken);
       localStorage.setItem("user", JSON.stringify(response.employer));

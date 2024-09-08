@@ -13,7 +13,7 @@ const Sidebar = () => {
   const loading = employerLoading || employeeLoading;
 
   if (loading) {
-    return null; // Show nothing while loading
+    return null;
   }
 
   // Define the navigation based on the user type

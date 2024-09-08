@@ -9,7 +9,7 @@ const App = () => (
   <Router>
     <EmployeeAuthProvider>
     <AuthProvider>
-      <AppRoutes />
+      <AppRoutes/>
     </AuthProvider>
     </EmployeeAuthProvider>
   </Router>
