@@ -8,7 +8,7 @@ import { useAuth } from '../../../context/EmployerContext'; // Import your conte
 
 export default function EmployerProfileCompletionForm() {
   // Get the employerId from the context
-  const { user } = useAuth();
+  const {completeProfile, user } = useAuth();
   const employerId = user ? user._id : null; // Adjust based on your context data structure
 
   const [formData, setFormData] = useState({
@@ -39,7 +39,7 @@ export default function EmployerProfileCompletionForm() {
 
     try {
       // Call the profile completion service
-      await EmployerService.completeEmployerProfile(formData);
+      const response = await completeProfile(formData);
       setSuccess('Profile completed successfully!');
       setLoading(false);
       navigate('/dashboard');

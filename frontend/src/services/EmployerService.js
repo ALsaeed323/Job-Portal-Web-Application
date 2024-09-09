@@ -52,7 +52,7 @@ const completeEmployerProfile = async (formData) => {
   };
   export default {
     signupEmployerInitial,
-  completeEmployerProfile,
+   completeEmployerProfile,
     signinEmployer,
     logoutEmployer,
   };

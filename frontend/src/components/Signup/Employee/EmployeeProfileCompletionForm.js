@@ -16,10 +16,11 @@ const skillsOptions = [ // Define the skills options array
 ];
 
 const EmployeeProfileCompletionForm = () => {
-  const { user } = useAuth();
+  const {completeProfile, user } = useAuth();
   const employeeId = user ? user._id : null;
   const [formData, setFormData] = useState({
     employeeId: employeeId, 
+    fullName: '',
     phoneNumber: '',
     professionalSummary: '',
     skills: [],
@@ -68,7 +69,8 @@ const EmployeeProfileCompletionForm = () => {
         ...formData,
         skills: selectedSkills.map(skill => skill.value),
       };
-      await employeeService.completeEmployeeProfile(profileData);
+      
+      const response = await completeProfile(formData);
       setSuccess('Profile completed successfully!');
       setLoading(false);
       navigate('/dashboard'); // Redirect to dashboard
@@ -90,6 +92,18 @@ const EmployeeProfileCompletionForm = () => {
                   <h2 className="fw-bold text-uppercase mb-2">Complete Your Profile</h2>
                   <p>Please provide the remaining details to complete your profile.</p>
                   <Form onSubmit={handleSubmit}>
+                        {/* Full Name */}
+                        <Form.Group as={Col} className="mb-3" controlId="formFullName">
+                      <Form.Label>Full Name</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter full name"
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleChange}
+                        required
+                      />
+                    </Form.Group>
                     {/* Phone Number */}
                     <Form.Group as={Col} className="mb-3" controlId="formPhoneNumber">
                       <Form.Label>Phone Number</Form.Label>

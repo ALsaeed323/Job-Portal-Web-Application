@@ -71,15 +71,35 @@ export const EmployeeAuthProvider = ({ children }) => {
       throw error;
     }
   };
-  
+  const completeProfile = async (formData, selectedSkills) => {
+    try {
+      const profileData = {
+        ...formData,
+        skills: selectedSkills.map(skill => skill.value),
+      };
+
+      const response = await employeeService.completeEmployeeProfile(profileData);
+      
+      // Update user context and local storage
+      setUser(response.employee);
+      localStorage.setItem("user", JSON.stringify(response.employee));
+
+      // Navigate to dashboard
+      navigate('/dashboard');
+      
+    } catch (err) {
+      console.error('Profile update failed:', err);
+      throw err;
+    }
+  };
 
   const value = {
     user,
     loading,
     login,
     logout,
+    completeProfile, // Add completeProfile to the context value
   };
-
   return (
     <AuthContext.Provider value={value}>
       {!loading && children}

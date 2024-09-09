@@ -56,7 +56,7 @@ export const completeEmployerProfile = async (req, res) => {
 
     await employer.save();
 
-    res.status(200).json({ message: 'Profile completed successfully' });
+    res.status(200).json({employer, message: 'Profile completed successfully' });
   } catch (error) {
     console.error('Error during profile completion:', error);
     res.status(500).json({ message: 'Server error during profile completion' });

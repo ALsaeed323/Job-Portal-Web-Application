@@ -28,6 +28,7 @@ const AppRoutes = () => {
   const url = location.pathname;
   const user = employerUser || employeeUser;
   const loading = employerLoading || employeeLoading;
+  console.log(user);
 
   useEffect(() => {
     if (loading) return; // Wait until the loading is complete

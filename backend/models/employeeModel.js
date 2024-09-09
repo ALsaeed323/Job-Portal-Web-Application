@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 
 const employeeSchema = new mongoose.Schema({
-  fullName: { type: String, required: true },
+  fullName: { type: String },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   phoneNumber: { type: String },

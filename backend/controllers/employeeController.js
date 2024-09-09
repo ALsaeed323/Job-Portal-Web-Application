@@ -9,10 +9,10 @@ dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET 
 
 export const signupEmployeeInitial = async (req, res) => {
-  const { fullName, email, password } = req.body;
+  const { email, password } = req.body;
   try {
     // Create a new employee record with only the initial required fields
-    const newEmployee = new Employee({ fullName, email, password, profileCompleted: false }); // Set profileCompleted to false
+    const newEmployee = new Employee({ email, password, profileCompleted: false }); // Set profileCompleted to false
     await newEmployee.save();
     res.status(201).json({ message: 'Employee initial signup successful', employeeId: newEmployee._id });
   } catch (error) {
@@ -22,7 +22,7 @@ export const signupEmployeeInitial = async (req, res) => {
 
 // Complete the employee profile with additional details
 export const completeEmployeeProfile = async (req, res) => {
-  const { employeeId, phoneNumber, professionalSummary, skills, experiences, education } = req.body;
+  const { employeeId,  fullName,phoneNumber, professionalSummary, skills, experiences, education } = req.body;
 
   // Check if employeeId is provided
   if (!employeeId) {
@@ -39,6 +39,7 @@ export const completeEmployeeProfile = async (req, res) => {
     }
 
     // Update the employee with the additional profile details
+    employee. fullName = fullName || employee.fullName;
     employee.phoneNumber = phoneNumber || employee.phoneNumber;
     employee.professionalSummary = professionalSummary || employee.professionalSummary;
     employee.skills = skills && skills.length > 0 ? skills : employee.skills;
@@ -49,7 +50,7 @@ export const completeEmployeeProfile = async (req, res) => {
     // Save the updated employee
     await employee.save();
 
-    res.status(200).json({ message: 'Profile completed successfully' });
+    res.status(200).json({ employee,  message: 'Profile completed successfully' });
 
   } catch (error) {
     // Log the error and send a 400 status with error message

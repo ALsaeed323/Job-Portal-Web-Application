@@ -69,6 +69,26 @@ export const AuthProvider = ({ children }) => {
       throw error;
     }
   };
+  const completeProfile = async (formData) => {
+    try {
+      const profileData = {
+        ...formData,
+      };
+
+      const response = await employerService.completeEmployerProfile(profileData);
+      
+      // Update user context and local storage
+      setUser(response.employer);
+      localStorage.setItem("user", JSON.stringify(response.employer));
+
+      // Navigate to dashboard
+      navigate('/dashboard');
+      
+    } catch (err) {
+      console.error('Profile update failed:', err);
+      throw err;
+    }
+  };
   
 
   const value = {
@@ -76,6 +96,7 @@ export const AuthProvider = ({ children }) => {
     loading,
     login,
     logout,
+    completeProfile,
   };
 
   return (
