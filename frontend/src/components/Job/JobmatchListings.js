@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Table, Button } from 'react-bootstrap';
+import { Container, Card, Button, Row, Col } from 'react-bootstrap';
 import JobService from '../../services/JobService';
 import { useAuth } from '../../context/EmployeeContext';
 import '../../components/Job/EmployeeApplications.css';
@@ -41,55 +41,50 @@ const JobListingsPage = () => {
       alert(error.response?.data?.message || 'An error occurred while applying.');
     }
   };
+
   if (loading) {
     return <div>Loading...</div>;
   }
 
   return (
     <div className="gradient-backgroundeee">
-    <Container>
-      <h1>Job Listings</h1>
-      {jobs.length > 0 ? (
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Job Title</th>
-              <th>Company Name</th>
-              <th>Location</th>
-              <th>Description</th>
-              <th>Requirements</th>
-              <th>Application Deadline</th>
-              <th>Apply</th>
-            </tr>
-          </thead>
-          <tbody>
+      <Container>
+        <h1>Job Listings</h1>
+        {jobs.length > 0 ? (
+          <Row>
             {jobs.map((job, index) => (
-              <tr key={job._id}>
-                <td>{index + 1}</td>
-                <td>{job.title}</td>
-                <td>{job.companyName}</td>
-                <td>{job.location}</td>
-                <td>{job.description}</td>
-                <td>{job.requirements}</td>
-                <td>{job.applicationDeadline || 'N/A'}</td>
-                <td>
-                  <Button
-                    variant="primary"
-                    onClick={() => handleApply(job._id)}
-                    disabled={job.applied} // Optionally disable if already applied
-                  >
-                    Apply
-                  </Button>
-                </td>
-              </tr>
+              <Col md={6} lg={4} key={job._id} className="mb-4">
+                <Card className="shadow-sm h-100">
+                  <Card.Body>
+                    <Card.Title>{job.title}</Card.Title>
+                    <Card.Subtitle className="mb-2 text-muted">
+                      {job.companyName} - {job.location}
+                    </Card.Subtitle>
+                    <Card.Text>
+                      <strong>Description:</strong> {job.description.length > 100 ? job.description.slice(0, 100) + '...' : job.description}
+                    </Card.Text>
+                    <Card.Text>
+                      <strong>Requirements:</strong> {job.requirements.length > 100 ? job.requirements.slice(0, 100) + '...' : job.requirements}
+                    </Card.Text>
+                    <Card.Text>
+                      <strong>Application Deadline:</strong> {job.applicationDeadline || 'N/A'}
+                    </Card.Text>
+                    <Button
+                      variant="primary"
+                      onClick={() => handleApply(job._id)}
+                      disabled={job.applied} // Optionally disable if already applied
+                    >
+                      Apply
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </Col>
             ))}
-          </tbody>
-        </Table>
-      ) : (
-        <p>No job postings found.</p>
-      )}
-    </Container>
+          </Row>
+        ) : (
+          <p>No job postings found.</p>
+        )}
+      </Container>
     </div>
   );
 };
