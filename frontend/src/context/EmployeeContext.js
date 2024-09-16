@@ -71,13 +71,9 @@ export const EmployeeAuthProvider = ({ children }) => {
       throw error;
     }
   };
-  const completeProfile = async (formData, selectedSkills) => {
+  const completeProfile = async (profileData) => {
     try {
-      const profileData = {
-        ...formData,
-        skills: selectedSkills.map(skill => skill.value),
-      };
-
+     
       const response = await employeeService.completeEmployeeProfile(profileData);
       
       // Update user context and local storage

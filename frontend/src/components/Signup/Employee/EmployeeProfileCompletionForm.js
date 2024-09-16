@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { Form, Button, Col, Row, Container, Card } from 'react-bootstrap';
+import { Form, Button, Col, Row, Container, Card, ProgressBar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import CreatableSelect from 'react-select/creatable'; // Import CreatableSelect from react-select
+import CreatableSelect from 'react-select/creatable';
 import Logo from '../../Logo';
-import employeeService from '../../../services/EmployeeService'; // Import the service
-import { useAuth } from '../../../context/EmployeeContext'; // Import your context
+import { useAuth } from '../../../context/EmployeeContext';
 import './EmployeeProfileCompletionForm.css';
 
-const skillsOptions = [ // Define the skills options array
+const skillsOptions = [
   { value: 'JavaScript', label: 'JavaScript' },
   { value: 'React', label: 'React' },
   { value: 'Node.js', label: 'Node.js' },
@@ -16,10 +15,11 @@ const skillsOptions = [ // Define the skills options array
 ];
 
 const EmployeeProfileCompletionForm = () => {
-  const {completeProfile, user } = useAuth();
+  const { completeProfile, user } = useAuth();
   const employeeId = user ? user._id : null;
+
   const [formData, setFormData] = useState({
-    employeeId: employeeId, 
+    employeeId: employeeId,
     fullName: '',
     phoneNumber: '',
     professionalSummary: '',
@@ -32,6 +32,7 @@ const EmployeeProfileCompletionForm = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [step, setStep] = useState(1); 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -59,26 +60,49 @@ const EmployeeProfileCompletionForm = () => {
     });
   };
 
+  const validateExperiences = () => {
+    return formData.experiences.every(exp => exp.jobTitle && exp.companyName && exp.startDate && exp.endDate);
+  };
+
+  const validateEducation = () => {
+    return formData.education.every(edu => edu.institutionName && edu.degree && edu.graduationYear);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
+    if (!validateExperiences()) {
+      setError('Please fill out all fields in the Experience section.');
+      setLoading(false);
+      return;
+    }
+
+    if (!validateEducation()) {
+      setError('Please fill out all fields in the Education section.');
+      setLoading(false);
+      return;
+    }
+
     try {
       const profileData = {
         ...formData,
-        skills: selectedSkills.map(skill => skill.value),
+        skills: selectedSkills.map((skill) => skill.value),
       };
-      
-      const response = await completeProfile(formData);
+
+      const response = await completeProfile(profileData);
       setSuccess('Profile completed successfully!');
       setLoading(false);
-      navigate('/dashboard'); // Redirect to dashboard
+      navigate('/dashboard'); 
     } catch (err) {
       setError(err.message || 'Something went wrong!');
       setLoading(false);
     }
   };
+
+  const handleNext = () => setStep((prevStep) => prevStep + 1);
+  const handleBack = () => setStep((prevStep) => prevStep - 1);
 
   return (
     <>
@@ -91,58 +115,67 @@ const EmployeeProfileCompletionForm = () => {
                 <Card.Body>
                   <h2 className="fw-bold text-uppercase mb-2">Complete Your Profile</h2>
                   <p>Please provide the remaining details to complete your profile.</p>
+
+                  {/* Progress Bar */}
+                  <ProgressBar now={(step / 3) * 100} label={`Step ${step} of 3`} />
+
                   <Form onSubmit={handleSubmit}>
-                        {/* Full Name */}
+                    {step === 1 && (
+                      <>
+                        {/* Step 1: Personal Details */}
                         <Form.Group as={Col} className="mb-3" controlId="formFullName">
-                      <Form.Label>Full Name</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Enter full name"
-                        name="fullName"
-                        value={formData.fullName}
-                        onChange={handleChange}
-                        required
-                      />
-                    </Form.Group>
-                    {/* Phone Number */}
-                    <Form.Group as={Col} className="mb-3" controlId="formPhoneNumber">
-                      <Form.Label>Phone Number</Form.Label>
-                      <Form.Control
-                        type="tel"
-                        placeholder="Enter phone number"
-                        name="phoneNumber"
-                        value={formData.phoneNumber}
-                        onChange={handleChange}
-                      />
-                    </Form.Group>
+                          <Form.Label>Full Name</Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="Enter full name"
+                            name="fullName"
+                            value={formData.fullName}
+                            onChange={handleChange}
+                            required
+                          />
+                        </Form.Group>
 
-                    {/* Professional Summary */}
-                    <Form.Group as={Col} className="mb-3" controlId="formProfessionalSummary">
-                      <Form.Label>Professional Summary</Form.Label>
-                      <Form.Control
-                        as="textarea"
-                        rows={3}
-                        placeholder="Enter a brief summary"
-                        name="professionalSummary"
-                        value={formData.professionalSummary}
-                        onChange={handleChange}
-                      />
-                    </Form.Group>
+                        <Form.Group as={Col} className="mb-3" controlId="formPhoneNumber">
+                          <Form.Label>Phone Number</Form.Label>
+                          <Form.Control
+                            type="tel"
+                            placeholder="Enter phone number"
+                            name="phoneNumber"
+                            value={formData.phoneNumber}
+                            onChange={handleChange}
+                          />
+                        </Form.Group>
 
-                    {/* Skills */}
-                    <Form.Group as={Col} className="mb-3" controlId="formSkills">
-                      <Form.Label>Skills</Form.Label>
-                      <CreatableSelect
-                        isMulti
-                        options={skillsOptions}
-                        value={selectedSkills}
-                        onChange={handleSkillsChange}
-                        placeholder="Select or add skills"
-                      />
-                    </Form.Group>
+                        <Form.Group as={Col} className="mb-3" controlId="formProfessionalSummary">
+                          <Form.Label>Professional Summary</Form.Label>
+                          <Form.Control
+                            as="textarea"
+                            rows={3}
+                            placeholder="Enter a brief summary"
+                            name="professionalSummary"
+                            value={formData.professionalSummary}
+                            onChange={handleChange}
+                          />
+                        </Form.Group>
+                      </>
+                    )}
 
-                    {/* Experience Section */}
-                    <h5>Experience</h5>
+                    {step === 2 && (
+                      <>
+                        {/* Step 2: Skills */}
+                        <Form.Group as={Col} className="mb-3" controlId="formSkills">
+                          <Form.Label>Skills</Form.Label>
+                          <CreatableSelect
+                            isMulti
+                            options={skillsOptions}
+                            value={selectedSkills}
+                            onChange={handleSkillsChange}
+                            placeholder="Select or add skills"
+                          />
+                        </Form.Group>
+
+                        {/* Experience Section */}
+                        <h5>Experience</h5>
                     {formData.experiences.map((experience, index) => (
                       <div key={index} className="mb-4">
                         <Form.Group className="mb-3" controlId={`formJobTitle${index}`}>
@@ -231,8 +264,13 @@ const EmployeeProfileCompletionForm = () => {
                       Add Another Experience
                     </Button>
 
-                    {/* Education Section */}
-                    <h5 className="mt-4">Education</h5>
+                      </>
+                    )}
+
+                    {step === 3 && (
+                      <>
+                        {/* Step 3: Education */}
+                        <h5 className="mt-4">Education</h5>
                     {formData.education.map((edu, index) => (
                       <div key={index} className="mb-4">
                         <Form.Group className="mb-3" controlId={`formInstitutionName${index}`}>
@@ -285,12 +323,27 @@ const EmployeeProfileCompletionForm = () => {
                     <Button variant="secondary" onClick={addEducation}>
                       Add Another Education
                     </Button>
+                      </>
+                    )}
 
-                    <div className="d-grid">
-                      <Button variant="primary" type="submit" disabled={loading}>
-                        {loading ? 'Completing Profile...' : 'Complete Profile'}
-                      </Button>
+                    {/* Step Navigation Buttons */}
+                    <div className="d-flex justify-content-between mt-4">
+                      {step > 1 && (
+                        <Button variant="secondary" onClick={handleBack}>
+                          Back
+                        </Button>
+                      )}
+                      {step < 3 ? (
+                        <Button variant="primary" onClick={handleNext}>
+                          Next
+                        </Button>
+                      ) : (
+                        <Button variant="primary" type="submit" disabled={loading}>
+                          {loading ? 'Completing Profile...' : 'Complete Profile'}
+                        </Button>
+                      )}
                     </div>
+
                     {error && <div className="text-danger mt-3">{error}</div>}
                     {success && <div className="text-success mt-3">{success}</div>}
                   </Form>

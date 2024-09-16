@@ -7,21 +7,21 @@ const employeeSchema = new mongoose.Schema({
   password: { type: String, required: true },
   phoneNumber: { type: String },
   professionalSummary: { type: String },
-  skills: { type: [String], required: true },
+  skills: { type: [String] },
   experiences: [
     {
-      jobTitle: { type: String, required: true },
-      companyName: { type: String, required: true },
-      startDate: { type: Date, required: true },
-      endDate: { type: Date, required: true },
-      description: { type: String, required: true },
+      jobTitle: { type: String },
+      companyName: { type: String },
+      startDate: { type: Date },
+      endDate: { type: Date},
+      description: { type: String  },
     },
   ],
   education: [
     {
-      institutionName: { type: String, required: true },
-      degree: { type: String, required: true },
-      graduationYear: { type: Number, required: true },
+      institutionName: { type: String},
+      degree: { type: String },
+      graduationYear: { type: Number },
     },
   ],
   userType: { type: String, default: 'employee' }, // Default user type

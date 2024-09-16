@@ -22,7 +22,7 @@ export const signupEmployeeInitial = async (req, res) => {
 
 // Complete the employee profile with additional details
 export const completeEmployeeProfile = async (req, res) => {
-  const { employeeId,  fullName,phoneNumber, professionalSummary, skills, experiences, education } = req.body;
+  const { employeeId, fullName,phoneNumber, professionalSummary, skills, experiences, education } = req.body;
 
   // Check if employeeId is provided
   if (!employeeId) {
