@@ -45,9 +45,12 @@ export const matchJobs = async (req, res) => {
     }
 
     const matchedJobs = await Job.find({
-      requirements: { $in: employee.skills },
+      $or: [
+        { requirements: { $regex: employee.skills.join('|'), $options: 'i' } },
+        { requirements: { $regex: employee.experiences.join('|'), $options: 'i' } }
+      ]
     });
-
+    
     // Optional: Further refine the matching by comparing experiences or using advanced algorithms
 
     res.status(200).json(matchedJobs);
