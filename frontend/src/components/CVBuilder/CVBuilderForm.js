@@ -3,6 +3,7 @@ import { Form, Button, Col, Row, Container } from "react-bootstrap";
 import jsPDF from "jspdf";
 import { useAuth } from "../../context/EmployerContext";
 import "./CVBuilderForm.css";
+import employeeService from '../../services/EmployeeService'; 
 
 const CVBuilderForm = () => {
   const { user } = useAuth();
@@ -49,10 +50,54 @@ const CVBuilderForm = () => {
     });
   };
 
-  const handleDownload = () => {
+  // Function to generate PDF and save it to the server
+  const handleDownload = async () => {
     const doc = new jsPDF();
-    // Your PDF generation code here...
-    doc.save(`${formData.fullName}_CV.pdf`);
+    doc.text(`Name: ${formData.fullName}`, 10, 10);
+    doc.text(`Email: ${formData.email}`, 10, 20);
+    doc.text(`Phone: ${formData.phoneNumber}`, 10, 30);
+
+    doc.text("Professional Summary:", 10, 40);
+    doc.text(formData.professionalSummary, 10, 50);
+
+    doc.text("Skills:", 10, 60);
+    doc.text(formData.skills.join(", "), 10, 70);
+
+    // Add experiences
+    let expStartY = 80;
+    formData.experiences.forEach((exp, index) => {
+      doc.text(`Experience ${index + 1}:`, 10, expStartY);
+      doc.text(`${exp.jobTitle} at ${exp.companyName}`, 10, expStartY + 10);
+      doc.text(`${exp.startDate} - ${exp.endDate}`, 10, expStartY + 20);
+      doc.text(exp.description, 10, expStartY + 30);
+      expStartY += 40;
+    });
+
+    // Add education
+    let eduStartY = expStartY + 10;
+    formData.education.forEach((edu, index) => {
+      doc.text(`Education ${index + 1}:`, 10, eduStartY);
+      doc.text(`${edu.degree} at ${edu.institutionName}`, 10, eduStartY + 10);
+      doc.text(`Graduation Year: ${edu.graduationYear}`, 10, eduStartY + 20);
+      eduStartY += 30;
+    });
+
+    // Save as PDF to client side
+    const pdfData = doc.output("blob");
+
+    // Call service to save CV to server
+    const fileName = `${formData.fullName}_CV.pdf`;
+    const response = await employeeService.saveCVService({
+      userId: user._id, // Assuming user object has an id field
+      fileName: fileName,
+      pdfData: pdfData,
+    });
+
+    if (response.success) {
+      alert("CV saved successfully!");
+    } else {
+      alert("Error saving CV.");
+    }
   };
 
   return (
@@ -318,9 +363,9 @@ const CVBuilderForm = () => {
           </Button>
 
           <div className="d-grid mt-4">
-            <Button variant="primary" onClick={handleDownload}>
-              Download CV
-            </Button>
+          <Button variant="primary" onClick={handleDownload}>
+            Download & Save CV
+          </Button>
           </div>
         </Form>
       </Container>

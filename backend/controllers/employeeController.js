@@ -2,6 +2,7 @@ import Employee from '../models/employeeModel.js';
 import bcrypt from 'bcrypt';
 import Session from '../models/employeeSesstionModel.js'; 
 import generateSessionToken from '../utils/gsesstion.js';
+import CV from "../models/cvModel.js";
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -137,5 +138,25 @@ export const logout = async (req, res) => {
   } catch (error) {
     console.error('Error during logout:', error);
     res.status(500).json({ message: "Server error", error });
+  }
+};
+export const saveCV = async (req, res) => {
+  try {
+    const { userId, fileName } = req.body;
+    const pdfData = req.file.buffer; // Assuming you're using multer to handle file uploads
+
+    // Create a new CV record
+    const newCV = new CV({
+      userId,
+      fileName,
+      pdfData,
+    });
+
+    await newCV.save();
+
+    res.status(200).json({ success: true, message: "CV saved successfully!" });
+  } catch (error) {
+    console.error("Error saving CV:", error);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 };

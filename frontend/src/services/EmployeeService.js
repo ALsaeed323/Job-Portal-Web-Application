@@ -30,6 +30,25 @@ const logoutEmployee = async (sessionToken) => {
     throw error;
   }
 };
+ const saveCVService = async (cvData) => {
+  const formData = new FormData();
+  formData.append("userId", cvData.userId);
+  formData.append("fileName", cvData.fileName);
+  formData.append("pdfData", cvData.pdfData); // Add PDF blob
+
+  try {
+    const response = await axios.post(`${API_URL}/save`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    return response.data; // Should return { success: true }
+  } catch (error) {
+    console.error("Error saving CV:", error);
+    return { success: false };
+  }
+};
 
 
 export default {
@@ -37,4 +56,5 @@ export default {
   completeEmployeeProfile,
   signinEmployee,
   logoutEmployee,
+  saveCVService,
 };
