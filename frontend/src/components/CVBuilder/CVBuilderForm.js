@@ -324,6 +324,48 @@ const CVBuilderForm = () => {
           </div>
         </Form>
       </Container>
+      <Container className="form-containercv">
+        {/* CV Live Preview Section */}
+        <Col md={6}>
+          <div className="cv-preview p-2 ">
+            <h2 className="cv-title">Live CV Preview</h2>
+            <div className="cv-content">
+              <h3>Name:{formData.fullName}</h3>
+              <p>Email: {formData.email}</p>
+              <p>Phone: {formData.phoneNumber}</p>
+
+              <h4>Professional Summary</h4>
+              <p>{formData.professionalSummary}</p>
+
+              <h4>Skills</h4>
+              <p>{formData.skills.join(", ")}</p>
+
+              <h4>Experience</h4>
+              {formData.experiences.map((exp, index) => (
+                <div key={index}>
+                  <h5>
+                    {exp.jobTitle} at {exp.companyName}
+                  </h5>
+                  <p>
+                    {exp.startDate} - {exp.endDate}
+                  </p>
+                  <p>{exp.description}</p>
+                </div>
+              ))}
+
+              <h4>Education</h4>
+              {formData.education.map((edu, index) => (
+                <div key={index}>
+                  <h5>
+                    {edu.degree} at {edu.institutionName}
+                  </h5>
+                  <p>Graduation Year: {edu.graduationYear}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Col>
+      </Container>
     </div>
   );
 };
