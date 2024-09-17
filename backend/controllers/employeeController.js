@@ -60,71 +60,59 @@ export const completeEmployeeProfile = async (req, res) => {
 };
 
 export const signinEmployee = async (req, res) => {
-    try {
-      const { email, password } = req.body;
-  
-      // Check if the employee exists
-      const employee = await Employee.findOne({ email });
-      if (!employee) {
-        return res.status(200).json({ message: 'Invalid email or password' });
-      }
-  
-      // Compare the password with the stored hash
-      const isMatch = await bcrypt.compare(password, employee.password);
-      console.log(isMatch);
-      if (!isMatch) {
-        return res.status(200).json({ message: 'Invalid email or password' });
-      }
+  try {
+    const { email, password } = req.body;
 
-      // Check if there's an active session for the employee
-      const activeSession = await Session.findOne({
-        userId: employee._id,
-        status: "active",
-      });
-  
-      if (activeSession) {
-        console.log("An active session already exists")
-        return res.status(200).json({ message: "An active session already exists" });
-      }
-  
-      // Check if there's an inactive session and reactivate it
-      let session = await Session.findOne({
-        userId: employee._id,
-        status: "inactive",
-      });
-  
-      if (session) {
-        session.status = "active";
-        session.lastAccess = new Date();
-        await session.save();
-      } else {
-        // Generate a JWT session token instead of a random session ID
-        const sessionToken = generateSessionToken({ 
-          userId: employee._id, 
-          role: 'employee' 
-        }, process.env.JWT_SECRET, { expiresIn: '1h' });  // Adjust expiration as needed
-  
-        // Create a new session in the database
-        session = new Session({
-          userId: employee._id,
-          sessionId: sessionToken,
-          status: 'active',
-          createdAt: new Date(),
-        });
-  
-        await session.save();
-      }
-  
-      // Respond with success and the JWT token
-      res.status(200).json({ 
-        message: 'Sign in successful', 
-        employee, 
-        sessionToken: session.sessionId  // JWT token is returned as sessionToken
-      });
-    } catch (error) {
-      console.error('Error signing in employee:', error);
-      res.status(200).json({ message: 'Server error' });
+    // Check if the employee exists
+    const employee = await Employee.findOne({ email });
+    if (!employee) {
+      return res.status(200).json({ message: 'Invalid email or password' });
     }
+
+    // Compare the password with the stored hash
+    const isMatch = await bcrypt.compare(password, employee.password);
+    if (!isMatch) {
+      return res.status(200).json({ message: 'Invalid email or password' });
+    }
+
+    // Check if there's an active session for the employee
+    const activeSession = await Session.findOne({
+      userId: employee._id,
+      status: "active",
+    });
+
+    // If an active session exists, return a message
+    if (activeSession) {
+      return res.status(200).json({ message: "An active session already exists" });
+    }
+
+    // If no active session, generate a new session
+    const sessionToken = generateSessionToken(
+      { userId: employee._id, role: 'employee' },
+      process.env.JWT_SECRET,
+      { expiresIn: '1h' } // Adjust expiration as needed
+    );
+
+    // Create and save a new session
+    const newSession = new Session({
+      userId: employee._id,
+      sessionId: sessionToken,
+      status: 'active',
+      createdAt: new Date(),
+    });
+
+    await newSession.save();
+
+    // Respond with success and the new session token
+    res.status(200).json({
+      message: 'Sign in successful',
+      employee,
+      sessionToken: newSession.sessionId, // Return the new JWT token as sessionToken
+    });
+  } catch (error) {
+    console.error('Error signing in employee:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
 };
 export const logout = async (req, res) => {
   try {
