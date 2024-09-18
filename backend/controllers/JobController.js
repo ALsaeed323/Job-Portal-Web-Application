@@ -2,6 +2,7 @@
 import Job from '../models/jobModel.js';
 import Employee from '../models/employeeModel.js';
 import Application from '../models/Application.js';
+import CV from '../models/cvModel.js';
 
 
 
@@ -122,3 +123,45 @@ export const updateApplicationStatus = async (req, res) => {
     res.status(500).json({ message: 'Server error', error });
   }
 };
+export const downloadEmployeeCV = async (req, res) => {
+  try {
+    const applicationId = req.params.applicationId;
+
+    // Find the application and populate employeeId field
+    const application = await Application.findById(applicationId).populate('employeeId');
+    if (!application || !application.employeeId._id) {
+      console.log('Application or Employee not found');
+      return res.status(404).json({ message: 'Application or employee not found' });
+    }
+
+    // Use employeeId to fetch the CV from the CV collection
+    const userId = application.employeeId._id;
+    const cv = await CV.findOne({ userId });
+
+    if (!cv) {
+      console.log('No CV found for employee:', userId.toString());
+      return res.status(404).json({ message: 'CV not found' });
+    } else {
+      console.log('CV found:', cv);
+    }
+
+    // Convert base64 to buffer if necessary
+    const pdfBuffer = Buffer.from(cv.pdfData, 'base64');
+
+    // Set headers for the response to download the file
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `attachment; filename=${userId}_CV.pdf`,
+    });
+
+    // Send the CV file buffer as a response
+    res.send(pdfBuffer);
+
+  } catch (error) {
+    console.error('Error downloading CV:', error);
+    res.status(500).json({ message: 'Error downloading CV' });
+  }
+};
+
+
+

@@ -101,7 +101,7 @@ const CVBuilderForm = () => {
   };
 
   return (
-    <div className="gradient-background">
+    <div className="gradient-backgrounded">
       <Container className="form-container">
         <h2 className="fw-bold text-uppercase mb-6 text-center">
           Build Your CV

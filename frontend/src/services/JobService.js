@@ -62,12 +62,18 @@ const getEmployerApplications = async (employerId) => {
 
 const updateApplicationStatus = async (applicationId, status) => {
   try {
-    const response = await axios.put(`${API_URL}/${applicationId}/status`, { status });
+    const response = await axios.put(`async}/${applicationId}/status`, { status });
     return response.data;
   } catch (error) {
     console.error('Updating application status failed:', error.response?.data || error.message);
     throw error.response?.data || error.message;
   }
+};
+const downloadEmployeeCV= async (applicationId) => {
+  const response = await axios.get(`${API_URL}/download/${applicationId}`, {
+    responseType: 'blob', // This ensures we get the file as a blob
+  });
+  return response;
 };
 
 
@@ -82,5 +88,6 @@ export default {
   getEmployeeApplications,
   getEmployerApplications,
   updateApplicationStatus,
+  downloadEmployeeCV,
  
 };

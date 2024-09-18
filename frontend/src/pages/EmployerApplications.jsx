@@ -38,61 +38,84 @@ const EmployerApplications = () => {
     }
   };
 
+  const handleDownloadCV = async (applicationId) => {
+    try {
+      const response = await JobService.downloadEmployeeCV(applicationId);
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `${applicationId}_CV.pdf`);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } catch (error) {
+      console.error('Error downloading CV:', error);  // log any errors
+    }
+  };
+  
   if (loading) {
     return <div>Loading...</div>;
   }
 
   return (
     <div className="gradient-backgrounde">
-    <Container>
-      <h1>Job Applications</h1>
-      {applications.length > 0 ? (
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Employee Name</th>
-              <th>Job Title</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {applications.map((application, index) => (
-              <tr key={application._id}>
-                <td>{index + 1}</td>
-                <td>{application.employeeId.fullName}</td>
-                <td>{application.jobId.title}</td>
-                <td>{application.status}</td>
-                <td>
-                  {application.status === 'Pending' && (
-                    <>
-                      <Button
-                        variant="success"
-                        onClick={() => handleStatusChange(application._id, 'Accepted')}
-                      >
-                        Accept
-                      </Button>
-                      <Button
-                        variant="danger"
-                        onClick={() => handleStatusChange(application._id, 'Denied')}
-                        className="ms-2"
-                      >
-                        Deny
-                      </Button>
-                    </>
-                  )}
-                </td>
+      <Container>
+        <h1>Job Applications</h1>
+        {applications.length > 0 ? (
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Employee Name</th>
+                <th>Job Title</th>
+                <th>Status</th>
+                <th>Actions</th>
+                <th>CV</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-      ) : (
-        <p>No applications found.</p>
-      )}
-    </Container>
-</div>
-    
+            </thead>
+            <tbody>
+              {applications.map((application, index) => (
+                <tr key={application._id}>
+                  <td>{index + 1}</td>
+                  <td>{application.employeeId.fullName}</td>
+                  <td>{application.jobId.title}</td>
+                  <td>{application.status}</td>
+                  <td>
+                    {application.status === 'Pending' && (
+                      <>
+                        <Button
+                          variant="success"
+                          onClick={() => handleStatusChange(application._id, 'Accepted')}
+                        >
+                          Accept
+                        </Button>
+                        <Button
+                          variant="danger"
+                          onClick={() => handleStatusChange(application._id, 'Denied')}
+                          className="ms-2"
+                        >
+                          Deny
+                        </Button>
+                      </>
+                    )}
+                  </td>
+                  <td>
+                    <Button
+                      variant="primary"
+                      onClick={() => handleDownloadCV(application._id)}
+                    >
+                      Download CV
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        ) : (
+          <p>No applications found.</p>
+        )}
+      </Container>
+    </div>
   );
 };
 

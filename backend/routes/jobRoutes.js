@@ -1,6 +1,6 @@
 // routes/jobRoutes.js
 import express from 'express';
-import { createJob, getAllJobs,matchJobs,applyForJob,getEmployeeApplications,getEmployerApplications,updateApplicationStatus } from '../controllers/JobController.js';
+import { createJob, getAllJobs,downloadEmployeeCV,matchJobs,applyForJob,getEmployeeApplications,getEmployerApplications,updateApplicationStatus } from '../controllers/JobController.js';
 
 const router = express.Router();
 
@@ -10,6 +10,7 @@ router.post('/apply', applyForJob);
 router.get('/getjobs', getAllJobs);
 router.get('/match/:employeeId', matchJobs);
 router.get('/:employeeId', getEmployeeApplications);
+router.get('/download/:applicationId', downloadEmployeeCV);
 router.get('/employer/:employerId', getEmployerApplications);
 router.put('/:applicationId/status', updateApplicationStatus);
 
